@@ -56,10 +56,7 @@ export default function CitizenPortalPage() {
       loadIssues();
     } catch (err) {
       console.error('Failed to upvote/verify:', err);
-      // Fallback local update for visual response
-      setIssues(prev => prev.map(issue => 
-        issue.id === id ? { ...issue, upvotes_count: issue.upvotes_count + 1 } : issue
-      ));
+      alert(err.message || 'You have already upvoted this issue.');
     }
   };
 
@@ -71,10 +68,7 @@ export default function CitizenPortalPage() {
       loadIssues();
     } catch (err) {
       console.error('Failed to verify:', err);
-      // Fallback local update
-      setIssues(prev => prev.map(issue => 
-        issue.id === id ? { ...issue, verifications_count: issue.verifications_count + 1 } : issue
-      ));
+      alert(err.message || 'You have already verified this issue.');
     }
   };
 

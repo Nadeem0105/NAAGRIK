@@ -102,7 +102,7 @@ export default function IssueDetailPage({ params }) {
       loadData();
     } catch (err) {
       console.error('Failed to upvote:', err);
-      setIssue(prev => ({ ...prev, upvotes_count: (prev.upvotes_count || 0) + 1 }));
+      alert(err.message || 'You have already upvoted this issue.');
     }
   };
 
@@ -112,7 +112,7 @@ export default function IssueDetailPage({ params }) {
       loadData();
     } catch (err) {
       console.error('Failed to verify:', err);
-      setIssue(prev => ({ ...prev, verifications_count: (prev.verifications_count || 0) + 1 }));
+      alert(err.message || 'You have already verified this issue.');
     }
   };
 
