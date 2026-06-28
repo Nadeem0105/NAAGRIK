@@ -88,7 +88,12 @@ npm run dev
 
 ---
 
-## 5. Recent Fixes
+## 5. Recent Fixes & Scoping Enhancements
 
-1. **Database Transaction Collision:** Fixed a bug in `assign_admin_region` (`admin.py`) where calling `async with db.begin():` crashed because the session had already started a transaction. Replaced it with direct property assignment followed by `await db.commit()`.
-2. **Dropdown Visibility & UI Theme Alignments:** Fixed a CSS bug where select dropdown options had black text on a dark background. Restyled the dropdown to match the light theme (`var(--paper-bright)` background with `var(--ink)` text) and replaced all undefined CSS variables with correct theme tokens.
+1. **Leaderboard Scoping**: Scoped the leaderboard by state so that Citizens, District Admins, and State Admins only see rankings within their own state. Super Admins retain a global view.
+2. **Explore Map & Issue Scoping**: Restricted the issues retrieved in the Explore Map. Citizens and State Admins only see issues in their state, District Admins only see issues in their district, and Super Admins see all issues globally.
+3. **Pulsing User Location Marker**: Implemented a pulsing blue dot marker ("You are here") on the Explore Map using browser geolocation, allowing citizens to see their current location relative to reported issues.
+4. **Automatic Location & Region Assignment**: Created the `PATCH /auth/me/location` endpoint on the backend. When a logged-in user with an unassigned region shares their location, the backend reverse-geocodes their coordinates via Nominatim and automatically assigns their account's `state_id` and `region_id` to the resolved regions.
+5. **Fix for Unlimited Likes / Upvotes**: Fixed a frontend bug where upvotes and verifications would increment the counter locally even if the backend rejected them as duplicates. Removed the optimistic increment on failure and added a clear error alert.
+6. **Database Transaction Collision:** Fixed a bug in `assign_admin_region` (`admin.py`) where calling `async with db.begin():` crashed because the session had already started a transaction. Replaced it with direct property assignment followed by `await db.commit()`.
+7. **Dropdown Visibility & UI Theme Alignments:** Fixed a CSS bug where select dropdown options had black text on a dark background. Restyled the dropdown to match the light theme (`var(--paper-bright)` background with `var(--ink)` text) and replaced all undefined CSS variables with correct theme tokens.
