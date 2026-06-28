@@ -38,6 +38,22 @@ export default function ExploreMapPage() {
     in_progress: true,
     resolved: false
   });
+  const [userLocation, setUserLocation] = useState(null);
+
+  // Fetch user location for the marker
+  useEffect(() => {
+    if (typeof window !== 'undefined' && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ lat: latitude, lng: longitude });
+        },
+        (err) => {
+          console.warn('Could not get user geolocation for marker:', err);
+        }
+      );
+    }
+  }, []);
 
   // 1. Fetch Issues on mount
   useEffect(() => {
@@ -190,6 +206,25 @@ export default function ExploreMapPage() {
     markersRef.current.forEach(m => map.removeLayer(m));
     markersRef.current = [];
 
+    // Add user location marker
+    if (userLocation) {
+      const pulsingDotIcon = L.divIcon({
+        className: 'user-location-marker',
+        html: '<div class="pulse-ring"></div><div class="pulse-dot"></div>',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+      });
+
+      const userMarker = L.marker([userLocation.lat, userLocation.lng], {
+        icon: pulsingDotIcon,
+        zIndexOffset: 1000
+      })
+      .bindPopup('<strong>You are here</strong>')
+      .addTo(map);
+
+      markersRef.current.push(userMarker);
+    }
+
     // Add new markers
     filteredIssues.forEach(issue => {
       if (!issue.latitude || !issue.longitude) return;
@@ -267,7 +302,7 @@ export default function ExploreMapPage() {
         }
       }
     }
-  }, [filteredIssues, mapLoaded]);
+  }, [filteredIssues, mapLoaded, userLocation]);
 
   const handleToggleCategory = (cat) => {
     setFilterCategory(prev => ({ ...prev, [cat]: !prev[cat] }));
