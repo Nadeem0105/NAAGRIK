@@ -67,6 +67,7 @@ class IssueResponse(BaseModel):
     resolution_image_url: Optional[str] = None
     sla_due_at: Optional[datetime] = None
     is_followed: Optional[bool] = False
+    region_id: Optional[uuid.UUID] = None
     
     # Location coordinates exposed to client
     latitude: float
@@ -107,6 +108,7 @@ class IssueResponse(BaseModel):
             resolution_image_url=issue.resolution_image_url,
             sla_due_at=issue.sla_due_at,
             is_followed=is_followed,
+            region_id=issue.region_id,
             latitude=issue.latitude,
             longitude=issue.longitude,
             upvotes_count=upvotes,

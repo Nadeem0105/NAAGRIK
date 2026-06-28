@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime, timedelta
 from typing import Optional, Any
-from sqlalchemy import select, func, and_, desc
+from sqlalchemy import select, func, and_, or_, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 import math
@@ -39,6 +39,8 @@ class IssueRepository:
         assigned_department_id: Optional[uuid.UUID] = None,
         is_unassigned: Optional[bool] = None,
         bbox: Optional[tuple[float, float, float, float]] = None,  # min_lat, min_lng, max_lat, max_lng
+        region_id: Optional[uuid.UUID] = None,
+        state_id: Optional[uuid.UUID] = None,
     ) -> tuple[list[Issue], int]:
         # Build query
         query = select(Issue)
@@ -64,6 +66,13 @@ class IssueRepository:
             min_lat, min_lng, max_lat, max_lng = bbox
             filters.append(Issue.latitude.between(min_lat, max_lat))
             filters.append(Issue.longitude.between(min_lng, max_lng))
+
+        if region_id:
+            filters.append(Issue.region_id == region_id)
+        if state_id:
+            from app.models.region import Region
+            district_subquery = select(Region.id).where(or_(Region.parent_region_id == state_id, Region.id == state_id))
+            filters.append(Issue.region_id.in_(district_subquery))
 
         if filters:
             query = query.where(and_(*filters))

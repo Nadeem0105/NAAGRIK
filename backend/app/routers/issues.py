@@ -129,6 +129,14 @@ async def list_issues(
                 detail="Invalid bounding box format. Must be minLat,minLng,maxLat,maxLng"
             )
 
+    region_id_filter = None
+    state_id_filter = None
+    if current_user and current_user.role == "admin":
+        if current_user.admin_scope == "district":
+            region_id_filter = current_user.region_id
+        elif current_user.admin_scope == "state":
+            state_id_filter = current_user.region_id
+
     offset = (page - 1) * limit
     issues, total = await issue_repo.get_paginated(
         db=db,
@@ -137,7 +145,9 @@ async def list_issues(
         status=status,
         category=category,
         severity=severity,
-        bbox=bbox_tuple
+        bbox=bbox_tuple,
+        region_id=region_id_filter,
+        state_id=state_id_filter
     )
 
     items = [await build_issue_response(db, issue, current_user) for issue in issues]
