@@ -1,0 +1,517 @@
+/* f:\CN Hackathon\frontend\src\app\dashboard\page.module.css */
+
+.pageWrapper {
+  padding: 32px 24px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.title {
+  font-family: var(--font-headings);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--ink-secondary);
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+.loader {
+  padding: 80px;
+  text-align: center;
+  color: var(--ink-secondary);
+  border: 1px dashed var(--keyline);
+  border-radius: var(--radius-lg);
+}
+
+.dashboardGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Stat Cards Row */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  min-height: 140px;
+}
+
+.statCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.statValueGroup {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.statNumber {
+  font-family: var(--font-headings);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.statUnit {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+}
+
+.statSubText {
+  font-size: 12px;
+  color: var(--ink-secondary);
+  font-weight: 600;
+}
+
+.indicatorBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+}
+
+.indicatorFill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  transition: width 0.8s ease-out;
+}
+
+.iconReported {
+  color: var(--ink-secondary);
+}
+
+.iconResolved {
+  color: var(--route-blue);
+}
+
+.iconTime {
+  color: var(--signal-amber);
+}
+
+.iconRate {
+  color: var(--success-green);
+}
+
+/* Chart and Map Grid */
+.chartAndMapGrid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 24px;
+}
+
+.chartCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timeToggle {
+  display: flex;
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.toggleBtn {
+  background: var(--paper-bright);
+  border: none;
+  border-right: 1px solid var(--keyline);
+  padding: 6px 12px;
+  font-family: var(--font-headings);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggleBtn:last-child {
+  border-right: none;
+}
+
+.toggleBtn:hover {
+  background: var(--paper-dim);
+}
+
+.toggleActive {
+  background: var(--ink) !important;
+  color: var(--paper-bright) !important;
+}
+
+.chartWrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.chartSvg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.gridLine {
+  stroke: var(--keyline);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.yAxisText {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--ink-secondary);
+  text-anchor: end;
+}
+
+.xAxisText {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--ink-secondary);
+  text-anchor: middle;
+}
+
+.chartLine {
+  stroke: var(--route-blue);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chartArea {
+  fill: var(--route-blue);
+  fill-opacity: 0.08;
+}
+
+.chartPointOuter {
+  fill: var(--paper-bright);
+  stroke: var(--route-blue);
+  stroke-width: 2;
+}
+
+.chartPointInner {
+  fill: var(--route-blue);
+}
+
+.pointLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+
+/* Sidebar grid elements */
+.sidebarGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.categoryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.categoryInfo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.categoryName {
+  color: var(--ink);
+}
+
+.progressContainer {
+  height: 6px;
+  background-color: var(--paper-dim);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width 0.8s cubic-bezier(0.1, 0.8, 0.25, 1);
+}
+
+/* Mini Map */
+.minimapCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.minimapHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.minimapCanvas {
+  height: 180px;
+  background-color: var(--paper-dim);
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.minimapGridOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--ink-secondary) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.15;
+}
+
+.minimapPin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.pinDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--error-red);
+  border: 1px solid var(--paper-bright);
+}
+
+.pinPulse {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--error-red);
+  animation: pulse 1.8s infinite ease-out;
+  opacity: 0;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.minimapEmpty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ink-secondary);
+}
+
+/* Table & Hotspots Detail Grid */
+.tableAndHotspotDetailGrid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 24px;
+}
+
+.performanceCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-md);
+}
+
+.performanceTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.performanceTable th,
+.performanceTable td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--keyline);
+}
+
+.performanceTable th {
+  background-color: var(--paper-dim);
+  font-weight: 700;
+  color: var(--ink-secondary);
+}
+
+.performanceTable tr:last-child td {
+  border-bottom: none;
+}
+
+.performanceTable tbody tr:nth-child(even) {
+  background-color: rgba(22, 35, 43, 0.02);
+}
+
+.topDeptRow {
+  background-color: rgba(44, 110, 140, 0.05) !important;
+}
+
+.deptName {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.highRate {
+  color: var(--success-green);
+  font-weight: 700;
+}
+
+.emptyTable {
+  text-align: center;
+  color: var(--ink-secondary);
+}
+
+/* Hotspots list styling */
+.hotspotsListCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.hotspotsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hotspotListItem {
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  background-color: var(--paper-bright);
+}
+
+.hotspotItemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.hotspotLocationGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hotspotPinIcon {
+  color: var(--error-red);
+}
+
+.hotspotTitle {
+  font-weight: 600;
+  font-family: var(--font-headings);
+  font-size: 14px;
+}
+
+.hotspotCountBadge {
+  font-size: 11px;
+  font-weight: 600;
+  background-color: #ffebee;
+  color: var(--error-red);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #ffcdd2;
+}
+
+.hotspotMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--ink-secondary);
+}
+
+.hotspotCategoryTag {
+  background-color: var(--paper-dim);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+.emptyHotspotsList {
+  padding: 24px;
+  text-align: center;
+  color: var(--ink-secondary);
+  border: 1px dashed var(--keyline);
+  border-radius: var(--radius-md);
+}
+
+@media (max-width: 1024px) {
+  .chartAndMapGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tableAndHotspotDetailGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsRow {
+    grid-template-columns: 1fr;
+  }
+}

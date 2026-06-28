@@ -1,0 +1,305 @@
+/* f:\CN Hackathon\frontend\src\app\report\page.module.css */
+
+.pageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 40px 16px;
+  min-height: calc(100vh - 64px);
+}
+
+.container {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--keyline);
+  padding-bottom: 12px;
+}
+
+.cancelBtn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--ink-secondary);
+  font-weight: 600;
+}
+
+.cancelBtn:hover {
+  color: var(--ink);
+}
+
+.pageTitle {
+  font-family: var(--font-headings);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.blueprintCard {
+  background-color: var(--paper-bright);
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-lg);
+  box-shadow: 4px 4px 0px rgba(22, 35, 43, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Stepper progress */
+.stepper {
+  display: flex;
+  border-bottom: 1px solid var(--keyline);
+}
+
+.stepIndicator {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  border-right: 1px solid var(--keyline);
+  background-color: var(--paper-dim);
+  color: var(--ink-secondary);
+  opacity: 0.6;
+}
+
+.stepIndicator:last-child {
+  border-right: none;
+}
+
+.stepActive {
+  background-color: var(--paper-bright);
+  border-bottom: 3px solid var(--route-blue);
+  color: var(--route-blue);
+  opacity: 1;
+}
+
+.errorAlert {
+  padding: 12px 24px;
+  background-color: #ffebee;
+  border-bottom: 1px solid #ffcdd2;
+  color: var(--error-red);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.form {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sectionTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.line {
+  height: 1px;
+  background-color: var(--keyline);
+  flex: 1;
+}
+
+/* Media upload dropzone */
+.dropzone {
+  width: 100%;
+  height: 220px;
+  border: 2px dashed rgba(22, 35, 43, 0.25);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: pointer;
+  position: relative;
+  background-color: var(--paper-dim);
+  transition: all 0.2s;
+}
+
+.dropzone:hover {
+  border-color: var(--route-blue);
+  background-color: rgba(44, 110, 140, 0.04);
+}
+
+.uploadIcon {
+  color: var(--route-blue);
+}
+
+.dropzoneText {
+  text-align: center;
+}
+
+.dropzoneText h4 {
+  font-family: var(--font-headings);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.fileInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.previewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-md);
+  background-color: var(--paper-dim);
+}
+
+.previewImage {
+  max-width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--keyline);
+}
+
+.removeImageBtn {
+  background-color: var(--error-red);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.stepTip {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  line-height: 1.4;
+}
+
+/* Location panel */
+.locationTeaser {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.coordinatesPanel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.coordGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.coordInput {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-sm);
+  background-color: var(--paper-dim);
+  outline: none;
+}
+
+.addressInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.addressInput {
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-sm);
+  background-color: var(--paper-dim);
+  outline: none;
+}
+
+/* Details form fields */
+.detailsFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputFieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.selectInput, .textInput, .textareaInput {
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-sm);
+  background-color: var(--paper-dim);
+  outline: none;
+}
+
+.selectInput:focus, .textInput:focus, .textareaInput:focus {
+  border-color: var(--route-blue);
+  background-color: var(--paper-bright);
+}
+
+/* Wizard footer navigations */
+.wizardFooter {
+  border-top: 1px solid var(--keyline);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .stepper {
+    flex-direction: column;
+  }
+  
+  .stepIndicator {
+    border-right: none;
+    border-bottom: 1px solid var(--keyline);
+  }
+  
+  .coordinatesPanel {
+    grid-template-columns: 1fr;
+  }
+}

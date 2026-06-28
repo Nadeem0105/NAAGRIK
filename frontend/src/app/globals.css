@@ -1,0 +1,168 @@
+:root {
+  /* Color Palette - Field Report / Blueprint Aesthetic */
+  --paper-bg: #f8faf7;
+  --paper-dim: #eceeeb;
+  --paper-bright: #ffffff;
+  --ink: #16232b;
+  --ink-secondary: #43474b;
+  --route-blue: #2c6e8c;
+  --route-blue-hover: #205066;
+  --signal-amber: #e8a23c;
+  --signal-amber-hover: #cb8a28;
+  --success-green: #2e7d32;
+  --error-red: #d32f2f;
+  --keyline: rgba(22, 35, 43, 0.1);
+  --keyline-solid: #16232b;
+  
+  /* Fonts will be injected as CSS variables by layout.js */
+  --font-headings: var(--font-archivo), sans-serif;
+  --font-body: var(--font-ibm-plex-sans), sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), monospace;
+
+  /* Spacing */
+  --unit: 4px;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--paper-bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Blueprint utility classes */
+.label-caps {
+  font-family: var(--font-headings);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-secondary);
+}
+
+.utility-code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* Tactile blueprint borders and card styles */
+.blueprint-card {
+  background: var(--paper-bright);
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.blueprint-card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 2px 4px 0px var(--keyline-solid);
+  border-color: var(--ink);
+}
+
+.blueprint-btn {
+  font-family: var(--font-headings);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.blueprint-btn-primary {
+  background-color: var(--route-blue);
+  color: #ffffff;
+  border-color: var(--route-blue);
+}
+
+.blueprint-btn-primary:hover {
+  background-color: var(--route-blue-hover);
+}
+
+.blueprint-btn-secondary {
+  background-color: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.blueprint-btn-secondary:hover {
+  background-color: var(--paper-dim);
+}
+
+.blueprint-btn-accent {
+  background-color: var(--signal-amber);
+  color: var(--ink);
+  border-color: var(--signal-amber);
+}
+
+.blueprint-btn-accent:hover {
+  background-color: var(--signal-amber-hover);
+}
+
+.blueprint-btn:active {
+  transform: scale(0.98);
+}
+
+/* Input Fields */
+.blueprint-input {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-md);
+  background-color: var(--paper-bright);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.blueprint-input:focus {
+  border-color: var(--route-blue);
+  box-shadow: 0 0 0 2px rgba(44, 110, 140, 0.15);
+}
+
+/* Blueprint Header Layout decoration */
+.blueprint-header {
+  border-bottom: 1px solid var(--keyline);
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+}
+.blueprint-header .eyebrow {
+  margin-bottom: 4px;
+}

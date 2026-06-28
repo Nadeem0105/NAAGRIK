@@ -1,0 +1,37 @@
+# Root-level .gitignore for NAAGRIK project
+
+# Python/Backend
+backend/venv/
+backend/.venv/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+backend/.pytest_cache/
+backend/.coverage
+backend/htmlcov/
+backend/instance/
+backend/*.db
+backend/*.sqlite
+backend/.env
+
+# Node/Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/dist/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# IDEs and System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

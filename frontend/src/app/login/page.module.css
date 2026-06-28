@@ -1,0 +1,244 @@
+/* f:\CN Hackathon\frontend\src\app\login\page.module.css */
+
+.pageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 40px 16px;
+}
+
+.clipboardCard {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--paper-bright);
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-lg);
+  box-shadow: 4px 4px 0px 0px rgba(22, 35, 43, 0.08);
+  overflow: hidden;
+  position: relative;
+}
+
+.clipHeader {
+  height: 48px;
+  border-bottom: 1px solid var(--keyline);
+  background-color: var(--paper-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.clipHoleLeft, .clipHoleRight {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--paper-bg);
+  border: 1px solid var(--keyline);
+  top: 18px;
+}
+
+.clipHoleLeft {
+  left: 24px;
+}
+
+.clipHoleRight {
+  right: 24px;
+}
+
+.cardContent {
+  padding: 32px 40px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoGroup {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.logoIcon {
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.title {
+  font-family: var(--font-headings);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.subtitle {
+  color: var(--ink-secondary);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  border-top: 1px solid var(--keyline);
+  margin-top: 8px;
+  padding-top: 8px;
+  display: inline-block;
+}
+
+.errorAlert {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: var(--radius-md);
+  color: var(--error-red);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 0;
+  color: var(--ink-secondary);
+}
+
+.input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(22, 35, 43, 0.3);
+  padding: 8px 8px 8px 28px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink);
+  outline: none;
+  transition: border-bottom-color 0.2s;
+}
+
+.input:focus {
+  border-bottom-color: var(--route-blue);
+}
+
+.formMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkbox {
+  cursor: pointer;
+  accent-color: var(--route-blue);
+}
+
+.resetLink {
+  color: var(--route-blue);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s;
+}
+
+.resetLink:hover {
+  color: var(--ink);
+}
+
+.submitBtn {
+  margin-top: 16px;
+  width: 100%;
+  background-color: var(--route-blue);
+  color: white;
+  border-color: var(--route-blue);
+  justify-content: center;
+  padding: 14px;
+  font-size: 13px;
+}
+
+.submitBtn:hover {
+  background-color: var(--route-blue-hover);
+}
+
+.cardFooter {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--keyline);
+  width: 100%;
+  text-align: center;
+}
+
+.footerText {
+  color: var(--ink-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.registerLink {
+  font-family: var(--font-headings);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.registerLink:hover {
+  color: var(--route-blue);
+}
+
+@media (max-width: 480px) {
+  .cardContent {
+    padding: 24px 20px 32px 20px;
+  }
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--ink-secondary);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.eyeBtn:hover {
+  color: var(--ink);
+}
+
+.passwordInput {
+  padding-right: 32px;
+}
+

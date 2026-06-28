@@ -1,0 +1,476 @@
+/* f:\CN Hackathon\frontend\src\app\issues\[id]\page.module.css */
+
+.detailWrapper {
+  padding: 32px 24px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.topActionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-secondary);
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: var(--ink);
+}
+
+.loader {
+  padding: 80px;
+  text-align: center;
+  color: var(--ink-secondary);
+}
+
+.errorContainer {
+  padding: 48px;
+  text-align: center;
+  border: 1px dashed var(--error-red);
+  border-radius: var(--radius-lg);
+  color: var(--error-red);
+}
+
+.contentLayout {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 32px;
+}
+
+.mainCol {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Header block */
+.issueHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.headerMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statusBadge {
+  font-family: var(--font-headings);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid;
+}
+
+.statusResolved {
+  background-color: #e8f5e9;
+  border-color: #c8e6c9;
+  color: var(--success-green);
+}
+
+.statusProgress {
+  background-color: #fff3e0;
+  border-color: #ffe0b2;
+  color: var(--signal-amber);
+}
+
+.statusReported {
+  background-color: var(--paper-dim);
+  border-color: var(--keyline);
+  color: var(--ink);
+}
+
+.title {
+  font-family: var(--font-headings);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+}
+
+/* Before/After Comparison Grid */
+.comparisonGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.comparisonCard {
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-lg);
+  background-color: var(--paper-bright);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.comparisonLabel {
+  background-color: var(--paper-dim);
+  border-bottom: 1px solid var(--keyline);
+  padding: 8px 16px;
+}
+
+.imageContainer {
+  height: 240px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f2f0;
+}
+
+.evidenceImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.noImagePlaceholder,
+.resolvedNoImagePlaceholder,
+.pendingPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  color: var(--ink-secondary);
+}
+
+.resolvedIcon {
+  color: var(--success-green);
+}
+
+.pendingIcon {
+  color: var(--route-blue);
+  animation: spinSlow 4s infinite linear;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.placeholderSubText {
+  font-size: 12px;
+  color: var(--ink-secondary);
+  max-width: 200px;
+}
+
+/* Geolocation log */
+.locationSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--keyline);
+}
+
+.locationCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-md);
+  background-color: var(--paper-bright);
+}
+
+.locationPinIcon {
+  color: var(--route-blue);
+}
+
+.locationInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.locationCategory {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Citizen actions row */
+.actionsSection {
+  display: flex;
+  gap: 16px;
+}
+
+.actionButton {
+  flex: 1;
+  justify-content: center;
+}
+
+/* Comments Notes Section */
+.commentsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.commentCard {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid rgba(22, 35, 43, 0.05);
+  padding-bottom: 16px;
+}
+
+.commentCard:last-of-type {
+  border-bottom: none;
+}
+
+.commentAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--paper-dim);
+  border: 1px solid var(--keyline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-secondary);
+}
+
+.commentBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.commentMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.commentUser {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.commentText {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+}
+
+.emptyComments {
+  padding: 32px;
+  text-align: center;
+  color: var(--ink-secondary);
+  border: 1px dashed var(--keyline);
+  border-radius: var(--radius-md);
+}
+
+/* Comment inputs */
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.commentTextarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 12px;
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-md);
+  outline: none;
+  background-color: var(--paper-bright);
+  color: var(--ink);
+  resize: vertical;
+}
+
+.commentTextarea:focus {
+  border-color: var(--route-blue);
+}
+
+.commentSubmitRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* RIGHT COLUMN Styles */
+.sideCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sideCard {
+  display: flex;
+  flex-direction: column;
+}
+
+/* SLA Clock style */
+.slaClock {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--route-blue);
+  letter-spacing: 0.05em;
+  padding: 8px 12px;
+  background-color: var(--paper-dim);
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  margin: 8px 0;
+}
+
+.slaBreached {
+  color: var(--error-red) !important;
+  background-color: #ffebee !important;
+  border-color: #ffcdd2 !important;
+}
+
+.slaSub {
+  font-size: 11px;
+  color: var(--ink-secondary);
+  line-height: 1.4;
+}
+
+/* Timeline Stepper */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 20px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background-color: var(--keyline);
+  z-index: 1;
+}
+
+.timelineStep {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+  margin-bottom: 24px;
+  z-index: 2;
+}
+
+.timelineStep:last-child {
+  margin-bottom: 0;
+}
+
+.timelineDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid;
+  background-color: var(--paper-bright);
+  margin-top: 4px;
+  margin-left: -20px;
+  z-index: 3;
+}
+
+.stepCurrent .timelineDot {
+  border-color: var(--route-blue);
+  background-color: var(--route-blue);
+  box-shadow: 0 0 0 4px rgba(44, 110, 140, 0.2);
+}
+
+.stepCompleted .timelineDot {
+  border-color: var(--success-green);
+  background-color: var(--success-green);
+}
+
+.stepInactive .timelineDot {
+  border-color: var(--keyline-solid);
+  background-color: var(--paper-dim);
+}
+
+.stepInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stepInfo span {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.stepCurrent .stepInfo span {
+  color: var(--route-blue);
+}
+
+.stepCompleted .stepInfo span {
+  color: var(--success-green);
+}
+
+.stepInfo p {
+  font-size: 11px;
+  color: var(--ink-secondary);
+}
+
+@media (max-width: 1024px) {
+  .contentLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .comparisonGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .actionsSection {
+    flex-direction: column;
+  }
+}

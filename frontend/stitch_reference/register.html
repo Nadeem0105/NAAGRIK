@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>COMMUNITY HERO - Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#321d00",
+                        "surface-container-highest": "#e1e3e0",
+                        "primary-fixed-dim": "#bac8d3",
+                        "secondary-fixed-dim": "#91cef0",
+                        "primary-fixed": "#d6e4ef",
+                        "surface-container-high": "#e7e9e6",
+                        "primary-container": "#16232b",
+                        "on-tertiary-container": "#bb7c14",
+                        "inverse-on-surface": "#eff1ee",
+                        "surface-container-low": "#f2f4f1",
+                        "outline-variant": "#c3c7cb",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#bac8d3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#3b4851",
+                        "on-primary-container": "#7d8b95",
+                        "surface-bright": "#f8faf7",
+                        "outline": "#74777b",
+                        "on-primary-fixed": "#101d25",
+                        "inverse-surface": "#2e312f",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb958",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffddb6",
+                        "surface-variant": "#e1e3e0",
+                        "surface-dim": "#d8dbd8",
+                        "primary": "#010c14",
+                        "tertiary": "#130900",
+                        "on-tertiary-fixed-variant": "#643f00",
+                        "on-secondary-container": "#1c6280",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eceeeb",
+                        "on-tertiary-fixed": "#2a1800",
+                        "background": "#f8faf7",
+                        "secondary-fixed": "#c2e8ff",
+                        "secondary-container": "#9fdcff",
+                        "on-secondary-fixed": "#001e2b",
+                        "secondary": "#206583",
+                        "on-surface-variant": "#43474b",
+                        "on-surface": "#191c1b",
+                        "on-secondary-fixed-variant": "#004d67",
+                        "on-background": "#191c1b",
+                        "surface-tint": "#536069",
+                        "error-container": "#ffdad6",
+                        "surface": "#f8faf7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "max-width": "1280px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Archivo Narrow"],
+                        "headline-lg": ["Archivo Narrow"],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "utility-code": ["IBM Plex Mono"],
+                        "label-caps": ["Archivo Narrow"],
+                        "headline-xl": ["Archivo Narrow"],
+                        "headline-lg-mobile": ["Archivo Narrow"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "utility-code": ["13px", { "lineHeight": "1.4", "fontWeight": "450" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Base styles from design system */
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        .blueprint-card {
+            background-color: theme('colors.surface-container-lowest');
+            border: 1px solid rgba(22, 35, 43, 0.1);
+            border-radius: theme('borderRadius.xl');
+        }
+
+        .blueprint-input {
+            border: none;
+            border-bottom: 1px solid theme('colors.outline');
+            background-color: transparent;
+            border-radius: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        
+        .blueprint-input:focus {
+            box-shadow: none;
+            border-color: theme('colors.primary');
+        }
+
+        .blueprint-button {
+            border-radius: theme('borderRadius.lg');
+            box-shadow: 0px 2px 0px 0px theme('colors.primary');
+        }
+        
+        .blueprint-button:active {
+            box-shadow: 0px 0px 0px 0px theme('colors.primary');
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop bg-[url('placeholder')] bg-cover bg-center" data-alt="A highly detailed architectural blueprint of a modern city overlayed with subtle, glowing digital nodes. The aesthetic is industrial utility meets civic tech, featuring precise geometric lines in off-white against a muted, paper-like background. The lighting is soft and ambient, highlighting the technical drawing nature of the image. The mood is authoritative and structured, embodying the 'Field Report meets City Blueprint' theme.">
+<div class="absolute inset-0 bg-background/80 backdrop-blur-sm z-0"></div>
+<div class="relative z-10 w-full max-w-md">
+<!-- Header / Logo -->
+<div class="text-center mb-8">
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tighter mb-2">COMMUNITY HERO</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Citizen Registration Portal</p>
+</div>
+<!-- Registration Card -->
+<div class="blueprint-card p-8 shadow-sm">
+<div class="flex items-center gap-2 mb-6 pb-2 border-b border-outline/10">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">assignment</span>
+<span class="font-label-caps text-label-caps text-primary uppercase">Official Registry</span>
+<span class="ml-auto font-utility-code text-utility-code text-on-surface-variant">ID: REG-001</span>
+</div>
+<form class="space-y-6">
+<!-- Full Name -->
+<div>
+<label class="block font-label-caps text-label-caps text-primary/60 uppercase mb-1" for="fullName">Full Name</label>
+<input class="blueprint-input w-full font-body-md text-body-md text-on-surface focus:ring-0" id="fullName" name="fullName" placeholder="John Doe" required="" type="text"/>
+</div>
+<!-- Email -->
+<div>
+<label class="block font-label-caps text-label-caps text-primary/60 uppercase mb-1" for="email">Email Address</label>
+<input class="blueprint-input w-full font-body-md text-body-md text-on-surface focus:ring-0" id="email" name="email" placeholder="john.doe@example.com" required="" type="email"/>
+</div>
+<!-- Ward/District -->
+<div>
+<label class="block font-label-caps text-label-caps text-primary/60 uppercase mb-1" for="district">Ward / District</label>
+<select class="blueprint-input w-full font-body-md text-body-md text-on-surface focus:ring-0 appearance-none bg-transparent" id="district" name="district" required="">
+<option disabled="" selected="" value="">Select your district</option>
+<option value="d1">District 1 - North</option>
+<option value="d2">District 2 - East</option>
+<option value="d3">District 3 - South</option>
+<option value="d4">District 4 - West</option>
+<option value="d5">District 5 - Central</option>
+</select>
+</div>
+<!-- Password -->
+<div>
+<label class="block font-label-caps text-label-caps text-primary/60 uppercase mb-1" for="password">Password</label>
+<input class="blueprint-input w-full font-body-md text-body-md text-on-surface focus:ring-0" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+<!-- Confirm Password -->
+<div>
+<label class="block font-label-caps text-label-caps text-primary/60 uppercase mb-1" for="confirmPassword">Confirm Password</label>
+<input class="blueprint-input w-full font-body-md text-body-md text-on-surface focus:ring-0" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required="" type="password"/>
+</div>
+<!-- Terms -->
+<div class="flex items-start gap-2 pt-2">
+<input class="mt-1 border-outline text-secondary focus:ring-secondary rounded-sm" id="terms" name="terms" required="" type="checkbox"/>
+<label class="font-body-md text-body-md text-on-surface-variant text-sm" for="terms">
+                        I acknowledge the <a class="text-secondary hover:underline" href="#">Civic Duty Guidelines</a> and <a class="text-secondary hover:underline" href="#">Data Policy</a>.
+                    </label>
+</div>
+<!-- Submit Button -->
+<div class="pt-4">
+<button class="blueprint-button w-full bg-secondary text-on-secondary font-label-caps text-label-caps uppercase py-3 flex items-center justify-center gap-2 transition-transform" type="submit">
+<span class="material-symbols-outlined text-[18px]">how_to_reg</span>
+                        Create Account
+                    </button>
+</div>
+</form>
+<div class="mt-8 text-center border-t border-outline/10 pt-6">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Already registered? 
+                    <a class="font-label-caps text-label-caps text-secondary uppercase hover:underline ml-1" href="#">Login to Portal</a>
+</p>
+</div>
+</div>
+<!-- Footer Blueprint details -->
+<div class="mt-6 flex justify-between items-center px-2 opacity-60">
+<span class="font-utility-code text-utility-code text-[10px] text-primary">SYS.V.1.0.4</span>
+<span class="font-utility-code text-utility-code text-[10px] text-primary">SECURE CONNECTION</span>
+</div>
+</div>
+</body></html>

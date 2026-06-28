@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Issue Detail - Community Hero</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@400;450&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#c2e8ff",
+                    "on-error": "#ffffff",
+                    "outline": "#74777b",
+                    "on-primary-fixed-variant": "#3b4851",
+                    "inverse-on-surface": "#eff1ee",
+                    "on-secondary-container": "#1c6280",
+                    "tertiary": "#130900",
+                    "primary": "#010c14",
+                    "surface-container-low": "#f2f4f1",
+                    "on-primary-fixed": "#101d25",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#ffddb6",
+                    "surface-container-high": "#e7e9e6",
+                    "surface-variant": "#e1e3e0",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#001e2b",
+                    "primary-container": "#16232b",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#191c1b",
+                    "inverse-surface": "#2e312f",
+                    "primary-fixed": "#d6e4ef",
+                    "on-surface-variant": "#43474b",
+                    "surface-tint": "#536069",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#643f00",
+                    "primary-fixed-dim": "#bac8d3",
+                    "background": "#f8faf7",
+                    "on-tertiary-container": "#bb7c14",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#c3c7cb",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#321d00",
+                    "surface-container": "#eceeeb",
+                    "on-tertiary-fixed": "#2a1800",
+                    "on-secondary-fixed-variant": "#004d67",
+                    "secondary-fixed-dim": "#91cef0",
+                    "inverse-primary": "#bac8d3",
+                    "surface-bright": "#f8faf7",
+                    "tertiary-fixed-dim": "#ffb958",
+                    "on-surface": "#191c1b",
+                    "secondary-container": "#9fdcff",
+                    "secondary": "#206583",
+                    "surface-dim": "#d8dbd8",
+                    "on-primary-container": "#7d8b95",
+                    "surface-container-highest": "#e1e3e0",
+                    "surface": "#f8faf7",
+                    "signal-amber": "#f59e0b",
+                    "alert-coral": "#f43f5e",
+                    "route-blue": "#3b82f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "unit": "4px",
+                    "max-width": "1280px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": [
+                            "Archivo Narrow"
+                    ],
+                    "headline-md": [
+                            "Archivo Narrow"
+                    ],
+                    "headline-xl": [
+                            "Archivo Narrow"
+                    ],
+                    "body-lg": [
+                            "Work Sans"
+                    ],
+                    "utility-code": [
+                            "IBM Plex Mono"
+                    ],
+                    "label-caps": [
+                            "Archivo Narrow"
+                    ],
+                    "headline-lg": [
+                            "Archivo Narrow"
+                    ],
+                    "body-md": [
+                            "Work Sans"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-xl": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "utility-code": [
+                            "13px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "450"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "1",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+        .pulse-circle::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            background-color: var(--tw-colors-route-blue);
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-secondary selection:text-on-secondary">
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex justify-between items-center w-full px-margin-desktop h-16 max-w-max-width mx-auto bg-background dark:bg-primary border-b border-outline/10 docked full-width top-0">
+<div class="flex items-center gap-8">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary-fixed uppercase">COMMUNITY HERO</div>
+<div class="flex gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant font-medium hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-label-caps text-label-caps uppercase" href="#">Report</a>
+<a class="text-secondary dark:text-secondary-fixed border-b-2 border-secondary pb-1 font-bold hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-label-caps text-label-caps uppercase opacity-80 transition-all duration-150" href="#">Map</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-label-caps text-label-caps uppercase" href="#">Leaderboard</a>
+</div>
+</div>
+<div class="flex items-center gap-4 text-primary dark:text-primary-fixed">
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-secondary transition-colors" data-icon="account_circle">account_circle</span>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-3xl mx-auto px-margin-mobile md:px-0 py-8 md:py-12 pb-32">
+<!-- Back Navigation & Follow Actions -->
+<div class="flex items-center justify-between mb-8">
+<a class="inline-flex items-center gap-2 text-on-surface-variant hover:text-secondary transition-colors group" href="#">
+<span class="material-symbols-outlined text-sm group-hover:-translate-x-1 transition-transform" data-icon="arrow_back">arrow_back</span>
+<span class="font-label-caps text-label-caps uppercase">Back to Map</span>
+</a>
+<button class="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors border border-outline/20 rounded-full px-4 py-1.5 hover:bg-surface-container">
+<span class="material-symbols-outlined text-sm" data-icon="notifications">notifications</span>
+<span class="font-label-caps text-label-caps uppercase">Follow</span>
+</button>
+</div>
+<!-- Header Section -->
+<header class="mb-12">
+<div class="flex items-center justify-between mb-4 flex-wrap gap-4">
+<!-- Signature Status Tag & SLA Badge -->
+<div class="flex items-center gap-3">
+<div class="inline-flex items-center bg-tertiary-fixed/30 rounded border border-tertiary-fixed-dim/20 overflow-hidden">
+<div class="w-1 h-full bg-tertiary-container self-stretch"></div>
+<span class="px-2 py-1 font-label-caps text-label-caps text-tertiary-container uppercase tracking-widest">In Progress</span>
+<div class="w-px h-4 bg-tertiary-fixed-dim/30 mx-2"></div>
+<span class="px-2 py-1 font-utility-code text-utility-code text-on-surface-variant">Updated 2h ago</span>
+</div>
+<!-- SLA Countdown Badge (Due Soon State) -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-signal-amber/10 text-signal-amber rounded border border-signal-amber/20 font-utility-code text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]" data-icon="timer">timer</span>
+<span>SLA: 48:12:05</span>
+</div>
+</div>
+<div class="font-utility-code text-utility-code text-outline uppercase">ID: #CH-8924-A</div>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-4">Pothole Cluster on Main St</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Severe degradation of asphalt spanning across the right lane, creating hazardous driving conditions and minor vehicle damage reports.</p>
+</header>
+<!-- Main Layout Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column: Details & Evidence (8 cols) -->
+<div class="md:col-span-8 space-y-12">
+<!-- Photo Gallery -->
+<section>
+<div class="flex items-center gap-2 mb-4 border-b border-outline/10 pb-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="photo_library">photo_library</span>
+<h2 class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Visual Evidence</h2>
+</div>
+<div class="grid grid-cols-2 gap-unit">
+<div class="relative aspect-video rounded-lg overflow-hidden border border-outline/10 bg-surface-container">
+<img class="object-cover w-full h-full" data-alt="A highly detailed close-up shot of a large, deep pothole in a city street, showing cracked asphalt and loose gravel. The lighting is overcast, creating a utilitarian, documentary style aesthetic typical of a civic field report. High contrast, sharp focus on the road damage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcIQJm-H9ei7YSR9ThQUHP37_bniw5nWKaN-ffLZPz_vl9yBbKC8LzWaLsxLj5sWBeKfe_kaiGFWpdUqIFClXhkBU6NcvHP36JH8SP2buHVG8LDp9Vkut-oyTzzab3KWeIL4hgm9ZUyF_mGy8z1j5Am8ehZuH2pWDUhMOb_5vBwQufz5LBzJ_yt-UBVa8Z4GyYie4aQDwiOze1McUajIqklbHKsHLAVaM626YCy_porRShhLbmDHTEkpLwpp5aXDCw7fOOrdUMAtwH"/>
+<div class="absolute bottom-2 right-2 bg-primary/80 text-on-primary font-utility-code text-utility-code px-2 py-1 rounded text-xs">IMG_01</div>
+</div>
+<div class="relative aspect-video rounded-lg overflow-hidden border border-outline/10 bg-surface-container">
+<img class="object-cover w-full h-full" data-alt="A wider street-level view showing multiple potholes clustered together in the right lane of an urban road. The shot is framed to show the context of the street environment, maintaining a raw, unfiltered civic documentation style. Concrete sidewalks and a faint city skyline are visible in the blurred background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1Xgf3vBhW6xwZhA3Xz4t_I53T-J5-JJIFQj79-tjKrsJeZhM0aB5Tiwg-Ml-qzRrtnl8qsIsSMUk3YIQJrRYY-NzhPL-MT2yxgOt3H3EE6KQmrZdEl0QowGI4YPnzt8HJMb_X6ExuXi9OwIcI37uVp7r5i6Fce0xrZfcwCbvYgPxzbpX_rQW1XOtuylVBOFcpVfgSN-OBIrHpU-Ypyh0j0jUUX_dwFydngNAjnWAgkz2gjkLgnmser6R2d8ckP01w7O-KuA8Msz0_"/>
+<div class="absolute bottom-2 right-2 bg-primary/80 text-on-primary font-utility-code text-utility-code px-2 py-1 rounded text-xs">IMG_02</div>
+</div>
+</div>
+</section>
+<!-- Location Map -->
+<section>
+<div class="flex items-center gap-2 mb-4 border-b border-outline/10 pb-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="location_on">location_on</span>
+<h2 class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Location Data</h2>
+</div>
+<div class="h-64 rounded-lg border border-outline/10 bg-surface-container relative overflow-hidden group">
+<!-- Simulated Map -->
+<div class="absolute inset-0 bg-[url('placeholder')] bg-cover bg-center opacity-50 grayscale mix-blend-multiply" data-alt="A highly stylized, minimalist architectural map view of a city grid. The map uses stark lines, pale background tones, and high-contrast structural layouts, resembling an official city planning blueprint or civil engineering document. Top-down view."></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<!-- Map Marker (Alert) -->
+<div class="relative">
+<div class="w-8 h-8 bg-error text-on-error flex items-center justify-center shadow-lg transform -translate-y-4" style="clip-path: polygon(50% 100%, 0 0, 100% 0);">
+<span class="material-symbols-outlined text-sm -mt-2" data-icon="warning" data-weight="fill">warning</span>
+</div>
+<div class="absolute bottom-0 left-1/2 w-4 h-1 bg-primary/20 rounded-[50%] blur-sm -translate-x-1/2"></div>
+</div>
+</div>
+<div class="absolute bottom-4 left-4 right-4 bg-surface/90 backdrop-blur border border-outline/10 p-3 rounded flex justify-between items-center">
+<div>
+<div class="font-body-md text-body-md font-medium">1200 Block, Main St</div>
+<div class="font-utility-code text-utility-code text-outline">40.7128° N, 74.0060° W</div>
+</div>
+<button class="font-label-caps text-label-caps text-secondary hover:text-primary transition-colors flex items-center gap-1 uppercase">
+                                Open Map <span class="material-symbols-outlined text-[16px]" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Metadata & Tags -->
+<section>
+<div class="flex items-center gap-2 mb-4 border-b border-outline/10 pb-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="label">label</span>
+<h2 class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Classification</h2>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container-high rounded border border-outline/10 font-label-caps text-label-caps text-on-surface-variant uppercase">
+<span class="material-symbols-outlined text-[14px]" data-icon="smart_toy">smart_toy</span> Infrastructure
+                        </span>
+<span class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container-high rounded border border-outline/10 font-label-caps text-label-caps text-on-surface-variant uppercase">
+<span class="material-symbols-outlined text-[14px]" data-icon="smart_toy">smart_toy</span> Road Hazard
+                        </span>
+<span class="inline-flex items-center gap-1 px-3 py-1.5 bg-surface-container-high rounded border border-outline/10 font-label-caps text-label-caps text-on-surface-variant uppercase">
+<span class="material-symbols-outlined text-[14px]" data-icon="smart_toy">smart_toy</span> High Priority
+                        </span>
+</div>
+</section>
+<!-- Interaction / Actions -->
+<section class="flex items-center gap-4 pt-6 border-t border-outline/10">
+<button class="flex-1 bg-secondary text-on-secondary h-12 rounded-lg font-label-caps text-label-caps uppercase tracking-wider hover:bg-secondary/90 transition-colors flex items-center justify-center gap-2 shadow-[0_2px_0_rgb(22,35,43)] active:translate-y-[2px] active:shadow-none">
+<span class="material-symbols-outlined" data-icon="thumb_up" data-weight="fill">thumb_up</span>
+                        Endorse Issue (42)
+                    </button>
+<button class="px-6 h-12 bg-surface text-on-surface border border-outline/20 rounded-lg font-label-caps text-label-caps uppercase tracking-wider hover:bg-surface-container transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="flag">flag</span>
+                        Still an Issue
+                    </button>
+</section>
+<!-- Comments -->
+<section class="pt-8">
+<div class="flex items-center gap-2 mb-6 border-b border-outline/10 pb-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="forum">forum</span>
+<h2 class="font-label-caps text-label-caps text-outline uppercase tracking-wider">Public Notes (2)</h2>
+</div>
+<div class="space-y-6">
+<!-- Comment 1 -->
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-outline flex-shrink-0 font-label-caps font-bold">
+CJ
+</div>
+<div class="bg-surface border border-outline/10 p-4 rounded-lg flex-grow rounded-tl-none">
+<div class="flex justify-between items-baseline mb-2">
+<span class="font-label-caps text-label-caps text-primary uppercase">Citizen Jane</span>
+<span class="font-utility-code text-utility-code text-outline text-xs">Yesterday, 14:30</span>
+</div>
+<p class="text-on-surface-variant">Blew out my front right tire here last night. It's much deeper than it looks in the photos.</p>
+</div>
+</div>
+<!-- Comment Input -->
+<div class="flex gap-4 mt-8">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center flex-shrink-0">
+<span class="font-label-caps text-label-caps">ME</span>
+</div>
+<div class="flex-grow">
+<textarea class="w-full bg-surface-container-low border-b border-outline/20 p-3 text-body-md focus:outline-none focus:border-secondary focus:bg-surface transition-colors resize-none h-24" placeholder="Add additional context or updates..."></textarea>
+<div class="flex justify-end mt-2">
+<button class="bg-primary text-on-primary px-6 py-2 rounded font-label-caps text-label-caps uppercase tracking-wider hover:bg-primary/90 transition-colors">Post Note</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Status & Timeline (4 cols) -->
+<div class="md:col-span-4 space-y-8">
+<!-- Timeline Widget -->
+<div class="bg-surface border border-outline/10 rounded-lg p-6">
+<h3 class="font-label-caps text-label-caps text-primary uppercase tracking-wider mb-6 border-b border-outline/10 pb-2">Status Timeline</h3>
+<div class="relative border-l-2 border-outline/10 ml-3 space-y-8">
+<!-- Future Step -->
+<div class="relative pl-6 opacity-50">
+<div class="absolute w-3 h-3 bg-surface border-2 border-outline rounded-full -left-[7.5px] top-1.5"></div>
+<div class="font-label-caps text-label-caps text-outline uppercase mb-1">Resolved</div>
+<div class="text-sm text-on-surface-variant mb-1">Awaiting completion.</div>
+</div>
+<!-- Current Step -->
+<div class="relative pl-6">
+<div class="absolute w-3 h-3 bg-route-blue rounded-full -left-[7.5px] top-1.5 shadow-[0_0_0_4px_var(--tw-colors-surface)] pulse-circle"></div>
+<div class="font-label-caps text-label-caps text-route-blue uppercase mb-1">In Progress</div>
+<div class="text-sm text-on-surface-variant mb-1">Crews dispatched for temporary fill.</div>
+<div class="font-utility-code text-utility-code text-outline text-xs">Oct 24, 09:15 AM</div>
+</div>
+<!-- Completed Step -->
+<div class="relative pl-6">
+<div class="absolute w-3 h-3 bg-route-blue rounded-full -left-[7.5px] top-1.5 shadow-[0_0_0_4px_var(--tw-colors-surface)]"></div>
+<div class="font-label-caps text-label-caps text-primary uppercase mb-1">Assigned</div>
+<div class="text-sm text-on-surface-variant mb-1">Routed to Dept. of Public Works.</div>
+<div class="font-utility-code text-utility-code text-outline text-xs">Oct 23, 14:20 PM</div>
+</div>
+<!-- Completed Step -->
+<div class="relative pl-6">
+<div class="absolute w-3 h-3 bg-route-blue rounded-full -left-[7.5px] top-1.5 shadow-[0_0_0_4px_var(--tw-colors-surface)]"></div>
+<div class="font-label-caps text-label-caps text-primary uppercase mb-1">Verified</div>
+<div class="text-sm text-on-surface-variant mb-1">Issue confirmed by city staff.</div>
+<div class="font-utility-code text-utility-code text-outline text-xs">Oct 23, 10:15 AM</div>
+</div>
+<!-- Completed Step -->
+<div class="relative pl-6">
+<div class="absolute w-3 h-3 bg-route-blue rounded-full -left-[7.5px] top-1.5 shadow-[0_0_0_4px_var(--tw-colors-surface)]"></div>
+<div class="font-label-caps text-label-caps text-primary uppercase mb-1">Reported</div>
+<div class="text-sm text-on-surface-variant mb-1">Initial submission verified by system.</div>
+<div class="font-utility-code text-utility-code text-outline text-xs">Oct 23, 08:45 AM</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-background dark:bg-primary border-t border-outline/10 shadow-lg docked full-width bottom-0 z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 font-label-caps text-label-caps active:bg-surface-container-high transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="add_circle">add_circle</span>
+<span class="uppercase">Report</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed bg-secondary-fixed/20 rounded-xl p-2 font-label-caps text-label-caps active:bg-surface-container-high scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="map" data-weight="fill">map</span>
+<span class="uppercase">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 font-label-caps text-label-caps active:bg-surface-container-high transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="leaderboard">leaderboard</span>
+<span class="uppercase">Leaderboard</span>
+</a>
+</nav>
+</body></html>

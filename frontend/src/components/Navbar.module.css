@@ -1,0 +1,331 @@
+/* f:\CN Hackathon\frontend\src\components\Navbar.module.css */
+
+.header {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96%;
+  max-width: 1280px;
+  z-index: 100;
+  background: rgba(22, 35, 43, 0.55); /* Primary-container at 55% */
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  border: 1px solid rgba(116, 119, 123, 0.25); /* Outline at 25% */
+  border-radius: 16px; /* Sleek rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease, backdrop-filter 0.2s ease, border-color 0.2s ease;
+}
+
+.header.scrolled {
+  background: rgba(22, 35, 43, 0.85); /* Primary-container at 85% */
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border-color: rgba(116, 119, 123, 0.4); /* Outline at 40% */
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(1px)) {
+  .header { background: #16232b; }
+  .header.scrolled { background: #16232b; }
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoLink {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logoMain {
+  font-family: var(--font-headings);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ffffff; /* on-primary */
+}
+
+.logoSub {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #bb7c14; /* on-tertiary-container (Signal Amber) */
+}
+
+/* Jurisdictional scope badge — shown for district/state/super admins */
+.scopeTag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  border-radius: 4px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  align-self: center;
+  text-transform: uppercase;
+}
+
+.scopeSuper {
+  color: #ffb703;
+  background: rgba(255, 183, 3, 0.12);
+  border: 1px solid rgba(255, 183, 3, 0.4);
+}
+
+.scopeState {
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.12);
+  border: 1px solid rgba(96, 165, 250, 0.4);
+}
+
+.scopeDistrict {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+}
+
+.logoVersion {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700; /* Bolded */
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(116, 119, 123, 0.4);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.navLink {
+  font-family: var(--font-headings); /* Archivo Narrow */
+  font-weight: 800; /* Bolder (800) for impact */
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ffffff; /* on-primary */
+  padding: 8px 12px;
+  border-radius: 0.25rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  border-left: 3px solid transparent; /* Reserve space for active state border-left */
+}
+
+.navLink:hover {
+  background-color: rgba(255, 255, 255, 0.08); /* 8% white wash overlay */
+}
+
+.navLink.active {
+  color: #bb7c14; /* on-tertiary-container (Signal Amber) */
+  background-color: rgba(50, 29, 0, 0.12); /* tertiary-container at 12% */
+  border-left: 3px solid #bb7c14; /* Signature Status Tag leading edge */
+}
+
+.userActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pointsBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(116, 119, 123, 0.3);
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  font-weight: 700; /* Bolded */
+}
+
+.pointsIcon {
+  color: #bb7c14;
+}
+
+.adminBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+  color: #c62828;
+  font-family: var(--font-headings);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s;
+}
+
+.adminBadge:hover {
+  background-color: #ffcdd2;
+}
+
+.notifWrapper {
+  position: relative;
+}
+
+.iconBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s;
+  position: relative;
+}
+
+.iconBtn:hover {
+  background-color: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+}
+
+.badgeCount {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: var(--error-red);
+  color: white;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bellActive {
+  color: #bb7c14;
+}
+
+.notifDropdown {
+  position: absolute;
+  right: 0;
+  top: 44px;
+  width: 320px;
+  background-color: #16232b; /* primary-container */
+  border: 1px solid rgba(116, 119, 123, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  z-index: 110;
+}
+
+.notifHeader {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(116, 119, 123, 0.25);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.unreadHeader {
+  font-size: 11px;
+  color: #bb7c14;
+  font-family: var(--font-mono);
+  font-weight: bold;
+}
+
+.notifList {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.emptyNotif {
+  padding: 24px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+}
+
+.notifItem {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.notifItem:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.unreadItem {
+  background-color: rgba(187, 124, 20, 0.1); /* Signal Amber tint */
+}
+
+.notifText {
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  color: #ffffff;
+}
+
+.notifTime {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .menuToggle {
+    display: block;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background-color: #16232b;
+    border-bottom: 1px solid rgba(116, 119, 123, 0.35);
+    flex-direction: column;
+    padding: 16px 24px;
+    gap: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 0; /* Full bleed on mobile */
+  }
+
+  .navOpen {
+    display: flex;
+  }
+}

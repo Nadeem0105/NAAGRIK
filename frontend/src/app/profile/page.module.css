@@ -1,0 +1,394 @@
+/* f:\CN Hackathon\frontend\src\app\profile\page.module.css */
+
+.profileWrapper {
+  padding: 32px 24px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.title {
+  font-family: var(--font-headings);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.profileMetaGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.identityCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 200px;
+}
+
+.identityHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatarBox {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: var(--paper-dim);
+  border: 1px solid var(--keyline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatarIcon {
+  color: var(--ink-secondary);
+}
+
+.userName {
+  font-family: var(--font-headings);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-secondary);
+}
+
+.metaIcon {
+  color: var(--route-blue);
+}
+
+.identityDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--keyline);
+  padding-top: 16px;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+/* Gauge card points layout */
+.gaugeCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  border-color: var(--route-blue);
+}
+
+.gaugeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.tierTitle {
+  font-family: var(--font-headings);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--route-blue);
+}
+
+.gaugeHeaderIcon {
+  color: var(--route-blue);
+}
+
+.gaugeScoreGroup {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.gaugeScoreNumber {
+  font-family: var(--font-headings);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.gaugeScoreUnit {
+  font-size: 12px;
+  color: var(--ink-secondary);
+}
+
+.progressContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.progressBarBg {
+  height: 8px;
+  background-color: var(--paper-dim);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background-color: var(--route-blue);
+  border-radius: var(--radius-sm);
+  transition: width 0.8s cubic-bezier(0.1, 0.8, 0.25, 1);
+}
+
+/* Badge Shelves Accolades */
+.badgesSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.badgesShelfGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.badgeCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  transition: all 0.2s ease-in-out;
+}
+
+.badgeIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid;
+}
+
+.badgeEarned {
+  border-color: rgba(44, 110, 140, 0.2);
+  background-color: var(--paper-bright);
+}
+
+.badgeEarned .badgeIconWrapper {
+  background-color: rgba(44, 110, 140, 0.08);
+  border-color: var(--route-blue);
+}
+
+.badgeIconActive {
+  color: var(--route-blue);
+}
+
+.badgeLocked {
+  border-style: dashed;
+  border-color: var(--keyline);
+  background-color: rgba(22, 35, 43, 0.01);
+  opacity: 0.7;
+}
+
+.badgeLocked .badgeIconWrapper {
+  background-color: var(--paper-dim);
+  border-color: var(--keyline);
+}
+
+.badgeIconLocked {
+  color: var(--ink-secondary);
+}
+
+.badgeTextInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.badgeName {
+  font-family: var(--font-headings);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.badgeDesc {
+  font-size: 11px;
+  color: var(--ink-secondary);
+  line-height: 1.4;
+}
+
+.badgeStatusTag {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 2px;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.badgeEarned .badgeStatusTag {
+  background-color: rgba(44, 110, 140, 0.1);
+  color: var(--route-blue);
+}
+
+.badgeLocked .badgeStatusTag {
+  background-color: var(--paper-dim);
+  color: var(--ink-secondary);
+}
+
+/* Submissions feed list */
+.activitySection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.activityHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--keyline);
+  padding-bottom: 12px;
+}
+
+.reportsCountBadge {
+  font-size: 12px;
+  font-weight: 600;
+  background-color: var(--paper-dim);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.loader {
+  padding: 40px;
+  text-align: center;
+  color: var(--ink-secondary);
+}
+
+.issueCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.issueHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.issueTitle {
+  font-family: var(--font-headings);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.issueDesc {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+
+.refIdTag {
+  font-size: 11px;
+  font-weight: 600;
+  background-color: var(--paper-dim);
+  border: 1px solid var(--keyline);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.issueFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(22, 35, 43, 0.05);
+  padding-top: 10px;
+}
+
+.footerDivider {
+  width: 1px;
+  height: 12px;
+  background-color: var(--keyline);
+}
+
+.statusBadgeGroup {
+  display: flex;
+}
+
+.statusBadge {
+  font-family: var(--font-headings);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.resolved {
+  background-color: #e8f5e9;
+  color: var(--success-green);
+  border: 1px solid #c8e6c9;
+}
+
+.inProgress {
+  background-color: #fff3e0;
+  color: var(--signal-amber);
+  border: 1px solid #ffe0b2;
+}
+
+.reported {
+  background-color: var(--paper-dim);
+  color: var(--ink);
+  border: 1px solid var(--keyline);
+}
+
+.noIssues {
+  padding: 40px;
+  text-align: center;
+  border: 1px dashed var(--keyline);
+  border-radius: var(--radius-lg);
+  color: var(--ink-secondary);
+}
+
+@media (max-width: 768px) {
+  .profileMetaGrid {
+    grid-template-columns: 1fr;
+  }
+}

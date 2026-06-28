@@ -1,0 +1,324 @@
+/* f:\CN Hackathon\frontend\src\app\explore\page.module.css */
+
+.exploreWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: calc(100vh - 64px);
+  position: relative;
+}
+
+.mapControlsHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--paper-bright);
+  border-bottom: 1px solid var(--keyline);
+  padding: 12px 24px;
+  z-index: 10;
+}
+
+.compassIcon {
+  color: var(--route-blue);
+}
+
+.mainCanvas {
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Left Drawer Filters */
+.filterDrawer {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  bottom: 20px;
+  width: 280px;
+  background-color: var(--paper-bright);
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-lg);
+  box-shadow: 4px 4px 0px rgba(22, 35, 43, 0.08);
+  display: flex;
+  flex-direction: column;
+  z-index: 30;
+  transition: transform 0.3s ease;
+}
+
+.drawerHidden {
+  transform: translateX(-320px);
+}
+
+.drawerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--keyline);
+}
+
+.closeDrawerBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink-secondary);
+}
+
+.drawerBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.filterSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.checkbox {
+  accent-color: var(--route-blue);
+}
+
+/* Zoom controls */
+.zoomControls {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 30;
+}
+
+.zoomBtn {
+  width: 36px;
+  height: 36px;
+  background-color: var(--paper-bright);
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-md);
+  box-shadow: 2px 2px 0px rgba(22, 35, 43, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.zoomBtn:hover {
+  background-color: var(--paper-dim);
+}
+
+/* Map background */
+.mapPattern {
+  flex: 1;
+  position: relative;
+  background-color: var(--paper-bg);
+  overflow: hidden;
+}
+
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(22, 35, 43, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 35, 43, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.mapLoading {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--paper-bright);
+  border: 1px solid var(--keyline);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  z-index: 30;
+}
+
+/* Map pins */
+.mapPin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.pinDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid white;
+}
+
+.markerUrgent .pinDot {
+  background-color: var(--error-red);
+}
+
+.markerActive .pinDot {
+  background-color: var(--signal-amber);
+}
+
+.markerResolved .pinDot {
+  background-color: var(--success-green);
+}
+
+.pinPulse {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--error-red);
+  opacity: 0.8;
+  animation: markerPulseAnim 1.8s infinite ease-out;
+}
+
+@keyframes markerPulseAnim {
+  0% { transform: scale(0.5); opacity: 0.8; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Right Details Panel Slide-over */
+.detailsSlideOver {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  bottom: 20px;
+  width: 320px;
+  background-color: var(--paper-bright);
+  border: 1px solid var(--keyline);
+  border-radius: var(--radius-lg);
+  box-shadow: -4px 4px 0px rgba(22, 35, 43, 0.08);
+  display: flex;
+  flex-direction: column;
+  z-index: 35;
+}
+
+.slideHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px;
+  border-bottom: 1px solid var(--keyline);
+}
+
+.tagRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statusBadge {
+  font-family: var(--font-headings);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid;
+  align-self: flex-start;
+}
+
+.statusResolved {
+  background-color: #e8f5e9;
+  border-color: #c8e6c9;
+  color: var(--success-green);
+}
+
+.statusProgress {
+  background-color: #fff3e0;
+  border-color: #ffe0b2;
+  color: var(--signal-amber);
+}
+
+.statusReported {
+  background-color: var(--paper-dim);
+  border-color: var(--keyline);
+  color: var(--ink);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink-secondary);
+}
+
+.slideBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.slideTitle {
+  font-family: var(--font-headings);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.slideDesc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+}
+
+.slideMetaList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 12px 0;
+  padding: 12px 0;
+  border-top: 1px dashed var(--keyline);
+  border-bottom: 1px dashed var(--keyline);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-secondary);
+}
+
+.viewDetailsBtn {
+  margin-top: auto;
+  width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .filterDrawer {
+    width: 240px;
+  }
+  
+  .detailsSlideOver {
+    width: 280px;
+  }
+}
