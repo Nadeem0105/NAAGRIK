@@ -52,3 +52,8 @@ class UserResponse(BaseModel):
 
 class UpdateStateRequest(BaseModel):
     state_id: uuid.UUID
+
+
+class UpdateLocationRequest(BaseModel):
+    latitude: float
+    longitude: float

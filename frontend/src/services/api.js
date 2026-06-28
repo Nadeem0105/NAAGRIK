@@ -85,6 +85,13 @@ export const api = {
     return request('/auth/me');
   },
 
+  updateLocation: async (latitude, longitude) => {
+    return request('/auth/me/location', {
+      method: 'PATCH',
+      body: { latitude, longitude }
+    });
+  },
+
   // Dashboard & Analytics
   getImpactStats: async () => {
     return request('/dashboard/impact');

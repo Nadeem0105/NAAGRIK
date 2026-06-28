@@ -131,11 +131,14 @@ async def list_issues(
 
     region_id_filter = None
     state_id_filter = None
-    if current_user and current_user.role == "admin":
-        if current_user.admin_scope == "district":
-            region_id_filter = current_user.region_id
-        elif current_user.admin_scope == "state":
-            state_id_filter = current_user.region_id
+    if current_user:
+        if current_user.role == "admin":
+            if current_user.admin_scope == "district":
+                region_id_filter = current_user.region_id
+            elif current_user.admin_scope == "state":
+                state_id_filter = current_user.region_id
+        elif current_user.role == "citizen" and current_user.state_id:
+            state_id_filter = current_user.state_id
 
     offset = (page - 1) * limit
     issues, total = await issue_repo.get_paginated(

@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.dependencies import get_current_user
 from app.db.session import get_db
 from app.models.user import User
-from app.schemas.auth import RegisterRequest, LoginRequest, TokenResponse, UserResponse, UpdateStateRequest
+from app.schemas.auth import RegisterRequest, LoginRequest, TokenResponse, UserResponse, UpdateStateRequest, UpdateLocationRequest
 from app.services.user_service import user_service
 from sqlalchemy import select
 
@@ -57,6 +57,34 @@ async def update_my_state(
 ):
     """Set or update the authenticated user's state."""
     current_user.state_id = payload.state_id
+    db.add(current_user)
+    await db.commit()
+    
+    from sqlalchemy.orm import joinedload
+    result = await db.execute(
+        select(User)
+        .options(joinedload(User.region))
+        .where(User.id == current_user.id)
+    )
+    return result.scalars().first()
+
+
+@router.patch("/me/location", response_model=UserResponse)
+async def update_my_location_region(
+    payload: UpdateLocationRequest,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db)
+):
+    """Resolve coordinates to state/district regions and update the user's location profile."""
+    from app.services.geo_service import reverse_geocode_region
+    
+    state_reg, district_reg = await reverse_geocode_region(payload.latitude, payload.longitude, db)
+    
+    if state_reg:
+        current_user.state_id = state_reg.id
+    if district_reg:
+        current_user.region_id = district_reg.id
+        
     db.add(current_user)
     await db.commit()
     

@@ -54,6 +54,28 @@ export function AppProvider({ children }) {
     init();
   }, [fetchUser, fetchNotifications]);
 
+  // Automatically update location region if geolocation is available and user is logged in
+  useEffect(() => {
+    if (user && (!user.region_id || !user.state_id)) {
+      if (typeof window !== 'undefined' && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const { latitude, longitude } = position.coords;
+            try {
+              const updatedUser = await api.updateLocation(latitude, longitude);
+              setUser(updatedUser);
+            } catch (err) {
+              console.error('Failed to auto-update location region:', err);
+            }
+          },
+          (error) => {
+            console.warn('Geolocation permission denied or failed:', error);
+          }
+        );
+      }
+    }
+  }, [user]);
+
   // Handle redirect if not logged in
   // Public paths: landing, auth pages, and read-only data pages (leaderboard, explore, issue details)
   useEffect(() => {

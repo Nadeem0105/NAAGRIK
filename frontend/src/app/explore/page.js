@@ -86,7 +86,16 @@ export default function ExploreMapPage() {
           const { south, north, west, east } = user.region.bbox;
           map.fitBounds([[south, west], [north, east]], { padding: [20, 20] });
         } else {
-          map.setView([12.9716, 77.5946], 12); // Center on Bangalore
+          map.setView([12.9716, 77.5946], 12); // Fallback to Bangalore
+          if (typeof window !== 'undefined' && navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const { latitude, longitude } = position.coords;
+                map.setView([latitude, longitude], 12);
+              },
+              (err) => console.warn('Could not locate user:', err)
+            );
+          }
         }
 
         // Render boundary GeoJSON if available
