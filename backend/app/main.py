@@ -147,6 +147,36 @@ def create_app() -> FastAPI:
             }
         )
 
+    # Temporary fix route
+    @application.get("/fix-regions", tags=["Admin"])
+    async def fix_regions(db: AsyncSession = Depends(get_db)):
+        from sqlalchemy import text
+        try:
+            await db.execute(text("""
+                UPDATE regions 
+                SET bbox_south = 11.5, bbox_north = 18.5, bbox_west = 74.0, bbox_east = 78.5
+                WHERE name = 'Karnataka'
+            """))
+            await db.execute(text("""
+                UPDATE regions 
+                SET bbox_south = 12.83, bbox_north = 13.14, bbox_west = 77.46, bbox_east = 77.78
+                WHERE name = 'Bengaluru Urban'
+            """))
+            await db.execute(text("""
+                UPDATE regions 
+                SET bbox_south = 8.0, bbox_north = 13.5, bbox_west = 76.2, bbox_east = 80.3
+                WHERE name = 'Tamil Nadu'
+            """))
+            await db.execute(text("""
+                UPDATE regions 
+                SET bbox_south = 12.98, bbox_north = 13.25, bbox_west = 80.16, bbox_east = 80.33
+                WHERE name = 'Chennai'
+            """))
+            await db.commit()
+            return {"status": "success", "message": "Regions updated successfully"}
+        except Exception as e:
+            return {"status": "error", "message": str(e)}
+
 
     # Add Session Middleware for OAuth
     from starlette.middleware.sessions import SessionMiddleware
