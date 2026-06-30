@@ -108,7 +108,7 @@ class IssueService:
         db: AsyncSession
     ):
         # Validate verification type
-        if verification_type not in ["upvote", "duplicate_flag", "spam_flag"]:
+        if verification_type not in ["upvote", "duplicate_flag", "spam_flag", "verify"]:
             raise ValueError(f"Invalid verification type: {verification_type}")
 
         issue = await issue_repo.get_by_id(db, issue_id)
