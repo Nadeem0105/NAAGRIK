@@ -43,6 +43,10 @@ export function AppProvider({ children }) {
 
   useEffect(() => {
     const init = async () => {
+      if (typeof window !== 'undefined' && window.location.pathname.startsWith('/auth/callback')) {
+        // Let the callback page handle initialization with the new token
+        return;
+      }
       const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
       if (token) {
         await fetchUser();
@@ -127,11 +131,15 @@ export function AppProvider({ children }) {
       // Re-configure api with new token if api object caches it, though usually it reads from localStorage
       setLocationUpdated(false);
       const u = await fetchUser();
-      await fetchNotifications();
-      if (u && (u.role === 'admin' || u.is_admin)) {
-        router.push('/admin');
+      if (u) {
+        await fetchNotifications();
+        if (u.role === 'admin' || u.is_admin) {
+          router.push('/admin');
+        } else {
+          router.push('/portal');
+        }
       } else {
-        router.push('/portal');
+        router.push('/login?error=auth_failed');
       }
     } finally {
       setLoading(false);

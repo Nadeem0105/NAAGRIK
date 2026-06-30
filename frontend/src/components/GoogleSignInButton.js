@@ -2,7 +2,9 @@
 import React from 'react';
 
 export function GoogleSignInButton() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://nagarik-backend-909339119086.asia-south1.run.app';
+  const isDev = process.env.NODE_ENV === 'development';
+  const defaultApiUrl = isDev ? 'http://localhost:8000' : 'https://nagarik-backend-909339119086.asia-south1.run.app';
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || defaultApiUrl;
   
   return (
     <a
