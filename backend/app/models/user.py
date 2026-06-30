@@ -18,7 +18,9 @@ class User(Base):
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     name: Mapped[str] = mapped_column(String, nullable=False)
     email: Mapped[str] = mapped_column(String, unique=True, index=True, nullable=False)
-    password_hash: Mapped[str] = mapped_column(String, nullable=False)
+    password_hash: Mapped[str | None] = mapped_column(String, nullable=True)
+    auth_provider: Mapped[str] = mapped_column(String, default="password", server_default="password", nullable=False)
+    google_id: Mapped[str | None] = mapped_column(String, unique=True, nullable=True)
     role: Mapped[str] = mapped_column(String, default="citizen")  # citizen, admin
     department_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("departments.id"), nullable=True)
     points: Mapped[int] = mapped_column(Integer, default=0)

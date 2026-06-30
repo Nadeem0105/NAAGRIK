@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useApp } from '@/context/AppContext';
 import { UserPlus, User, Mail, Lock, Shield, AlertTriangle, Eye, EyeOff } from 'lucide-react';
+import { GoogleSignInButton } from '@/components/GoogleSignInButton';
 import styles from './page.module.css';
 
 export default function RegisterPage() {
@@ -55,20 +56,20 @@ export default function RegisterPage() {
     <div className={`${styles.pageWrapper} blueprint-bg`}>
       <div className={styles.container}>
         {/* Header / Logo */}
-        <div className={styles.logoHeader}>
+        <div className={`${styles.logoHeader} animate-fade-in-up`}>
           <h1 className={styles.appTitle}>COMMUNITY HERO</h1>
           <p className={styles.appSubtitle}>Citizen Registration Portal</p>
         </div>
 
         {/* Card */}
-        <main className={styles.blueprintCard}>
+        <main className={`${styles.blueprintCard} animate-scale-up delay-100`}>
           <div className={styles.cardHeader}>
             <UserPlus size={16} className={styles.headerIcon} />
             <span className="label-caps">Create Account</span>
           </div>
 
           {error && (
-            <div className={styles.errorAlert}>
+            <div className={`${styles.errorAlert} animate-scale-up`}>
               <AlertTriangle size={16} />
               <span>{error}</span>
             </div>
@@ -76,7 +77,7 @@ export default function RegisterPage() {
 
           <form className={styles.form} onSubmit={handleSubmit}>
             {/* Full Name */}
-            <div className={styles.inputGroup}>
+            <div className={`${styles.inputGroup} animate-fade-in-up delay-200`}>
               <label className="label-caps" htmlFor="name">Full Name</label>
               <div className={styles.inputWrapper}>
                 <User size={16} className={styles.inputIcon} />
@@ -93,7 +94,7 @@ export default function RegisterPage() {
             </div>
 
             {/* Email */}
-            <div className={styles.inputGroup}>
+            <div className={`${styles.inputGroup} animate-fade-in-up delay-300`}>
               <label className="label-caps" htmlFor="email">Email Address</label>
               <div className={styles.inputWrapper}>
                 <Mail size={16} className={styles.inputIcon} />
@@ -110,7 +111,7 @@ export default function RegisterPage() {
             </div>
 
             {/* Password */}
-            <div className={styles.inputGroup}>
+            <div className={`${styles.inputGroup} animate-fade-in-up delay-400`}>
               <label className="label-caps" htmlFor="password">Password</label>
               <div className={styles.inputWrapper}>
                 <Lock size={16} className={styles.inputIcon} />
@@ -136,7 +137,7 @@ export default function RegisterPage() {
             </div>
 
             {/* Confirm Password */}
-            <div className={styles.inputGroup}>
+            <div className={`${styles.inputGroup} animate-fade-in-up delay-500`}>
               <label className="label-caps" htmlFor="confirmPassword">Confirm Password</label>
               <div className={styles.inputWrapper}>
                 <Lock size={16} className={styles.inputIcon} />
@@ -163,7 +164,7 @@ export default function RegisterPage() {
 
 
             {/* Terms checkbox */}
-            <div className={styles.checkboxWrapper}>
+            <div className={`${styles.checkboxWrapper} animate-fade-in-up delay-600`}>
               <input type="checkbox" id="terms" className={styles.checkbox} required />
               <label htmlFor="terms" className={styles.checkboxLabel}>
                 I acknowledge the <a href="#" className={styles.termsLink}>Civic Duty Guidelines</a> and <a href="#" className={styles.termsLink}>Data Policy</a>.
@@ -173,15 +174,24 @@ export default function RegisterPage() {
             {/* Submit Button */}
             <button
               type="submit"
-              className={`${styles.submitBtn} blueprint-btn`}
+              className={`${styles.submitBtn} blueprint-btn animate-fade-in-up delay-700`}
               disabled={submitting}
             >
               <span>{submitting ? 'Registering...' : 'Create Account'}</span>
             </button>
           </form>
 
+          <div className="animate-fade-in-up delay-700" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', margin: '1rem 0', fontSize: '0.75rem', color: '#74777B' }}>
+            <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(22, 35, 43, 0.1)' }} /> 
+            OR 
+            <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(22, 35, 43, 0.1)' }} />
+          </div>
+          <div className="animate-fade-in-up delay-700">
+            <GoogleSignInButton />
+          </div>
+
           {/* Footer Navigation */}
-          <div className={styles.cardFooter}>
+          <div className={`${styles.cardFooter} animate-fade-in-up delay-800`}>
             <p className={styles.footerText}>
               Already registered?
               <Link href="/login" className={styles.loginLink}>

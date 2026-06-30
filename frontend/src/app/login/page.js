@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useApp } from '@/context/AppContext';
 import { Mail, Lock, LogIn, Shield, AlertTriangle, Eye, EyeOff } from 'lucide-react';
+import { GoogleSignInButton } from '@/components/GoogleSignInButton';
 import styles from './page.module.css';
 
 export default function LoginPage() {
@@ -44,7 +45,7 @@ export default function LoginPage() {
 
   return (
     <div className={`${styles.pageWrapper} blueprint-bg`}>
-      <main className={styles.clipboardCard}>
+      <main className={`${styles.clipboardCard} animate-scale-up`}>
         {/* Metal Clip Aesthetic Header */}
         <div className={styles.clipHeader}>
           <div className={styles.clipHoleLeft}></div>
@@ -53,14 +54,14 @@ export default function LoginPage() {
 
         <div className={styles.cardContent}>
           {/* Logo Group */}
-          <div className={styles.logoGroup}>
+          <div className={`${styles.logoGroup} animate-fade-in-up delay-100`}>
             <Shield size={36} className={styles.logoIcon} />
             <h1 className={styles.title}>Community Hero</h1>
             <span className={styles.subtitle}>Sign in to your citizen dashboard</span>
           </div>
 
           {error && (
-            <div className={styles.errorAlert}>
+            <div className={`${styles.errorAlert} animate-scale-up`}>
               <AlertTriangle size={16} />
               <span>{error}</span>
             </div>
@@ -68,7 +69,7 @@ export default function LoginPage() {
 
           {/* Form */}
           <form className={styles.form} onSubmit={handleSubmit}>
-            <div className={styles.inputGroup}>
+            <div className={`${styles.inputGroup} animate-fade-in-up delay-200`}>
               <label className="label-caps" htmlFor="email">Email Address</label>
               <div className={styles.inputWrapper}>
                 <Mail size={16} className={styles.inputIcon} />
@@ -84,7 +85,7 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div className={styles.inputGroup}>
+            <div className={`${styles.inputGroup} animate-fade-in-up delay-300`}>
               <label className="label-caps" htmlFor="password">Password</label>
               <div className={styles.inputWrapper}>
                 <Lock size={16} className={styles.inputIcon} />
@@ -110,7 +111,7 @@ export default function LoginPage() {
             </div>
 
 
-            <div className={styles.formMeta}>
+            <div className={`${styles.formMeta} animate-fade-in-up delay-400`}>
               <label className={styles.checkboxLabel}>
                 <input type="checkbox" className={styles.checkbox} />
                 <span>Remember me</span>
@@ -120,7 +121,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className={`${styles.submitBtn} blueprint-btn`}
+              className={`${styles.submitBtn} blueprint-btn animate-fade-in-up delay-500`}
               disabled={submitting}
             >
               <span>{submitting ? 'Signing in...' : 'Sign In'}</span>
@@ -128,8 +129,17 @@ export default function LoginPage() {
             </button>
           </form>
 
+          <div className="animate-fade-in-up delay-500" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', margin: '1rem 0', fontSize: '0.75rem', color: '#74777B' }}>
+            <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(22, 35, 43, 0.1)' }} /> 
+            OR 
+            <div style={{ height: '1px', flex: 1, backgroundColor: 'rgba(22, 35, 43, 0.1)' }} />
+          </div>
+          <div className="animate-fade-in-up delay-500">
+            <GoogleSignInButton />
+          </div>
+
           {/* Footer Link */}
-          <div className={styles.cardFooter}>
+          <div className={`${styles.cardFooter} animate-fade-in-up delay-600`}>
             <p className={styles.footerText}>
               New to Nagarik?<br />
               <Link href="/register" className={styles.registerLink}>

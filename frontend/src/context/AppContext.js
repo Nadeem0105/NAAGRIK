@@ -12,6 +12,7 @@ export function AppProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [locationUpdated, setLocationUpdated] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -56,7 +57,7 @@ export function AppProvider({ children }) {
 
   // Automatically update location region if geolocation is available and user is logged in
   useEffect(() => {
-    if (user && (!user.region_id || !user.state_id)) {
+    if (user && !locationUpdated && user.role !== 'admin') {
       if (typeof window !== 'undefined' && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           async (position) => {
@@ -64,6 +65,7 @@ export function AppProvider({ children }) {
             try {
               const updatedUser = await api.updateLocation(latitude, longitude);
               setUser(updatedUser);
+              setLocationUpdated(true);
             } catch (err) {
               console.error('Failed to auto-update location region:', err);
             }
@@ -74,7 +76,7 @@ export function AppProvider({ children }) {
         );
       }
     }
-  }, [user]);
+  }, [user, locationUpdated]);
 
   // Handle redirect if not logged in
   // Public paths: landing, auth pages, and read-only data pages (leaderboard, explore, issue details)
@@ -90,6 +92,7 @@ export function AppProvider({ children }) {
     setLoading(true);
     try {
       await api.login(email, password);
+      setLocationUpdated(false);
       const u = await fetchUser();
       await fetchNotifications();
       if (u.role === 'admin' || u.is_admin) {
@@ -106,6 +109,7 @@ export function AppProvider({ children }) {
     setLoading(true);
     try {
       await api.register(name, email, password);
+      setLocationUpdated(false);
       await fetchUser();
       await fetchNotifications();
       router.push('/portal');
@@ -114,11 +118,32 @@ export function AppProvider({ children }) {
     }
   };
 
+  const handleTokenLogin = useCallback(async (token) => {
+    setLoading(true);
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('token', token);
+      }
+      // Re-configure api with new token if api object caches it, though usually it reads from localStorage
+      setLocationUpdated(false);
+      const u = await fetchUser();
+      await fetchNotifications();
+      if (u && (u.role === 'admin' || u.is_admin)) {
+        router.push('/admin');
+      } else {
+        router.push('/portal');
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [fetchUser, fetchNotifications, router]);
+
   const logout = () => {
     api.logout();
     setUser(null);
     setNotifications([]);
     setUnreadCount(0);
+    setLocationUpdated(false);
     router.push('/login');
   };
 
@@ -139,6 +164,7 @@ export function AppProvider({ children }) {
       unreadCount,
       login,
       register,
+      handleTokenLogin,
       logout,
       markRead,
       fetchUser,

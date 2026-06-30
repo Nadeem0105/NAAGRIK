@@ -51,5 +51,10 @@ class Settings(BaseSettings):
     RESEND_API_KEY: str = ""
     NOTIFICATION_FROM_EMAIL: str = "noreply@communityhero.app"
 
+    # Google OAuth
+    GOOGLE_CLIENT_ID: str = ""
+    GOOGLE_CLIENT_SECRET: str = ""
+    GOOGLE_REDIRECT_URI: str = "http://localhost:8000/auth/google/callback"
+
 
 settings = Settings()

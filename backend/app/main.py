@@ -147,8 +147,13 @@ def create_app() -> FastAPI:
             }
         )
 
+    # Add Session Middleware for OAuth
+    from starlette.middleware.sessions import SessionMiddleware
+    application.add_middleware(SessionMiddleware, secret_key=settings.JWT_SECRET_KEY)
+
     # Include Routers
     from app.routers.auth import router as auth_router
+    from app.routers.auth_google import router as auth_google_router
     from app.routers.issues import router as issues_router
     from app.routers.departments import router as departments_router
     from app.routers.admin import router as admin_router
@@ -157,6 +162,7 @@ def create_app() -> FastAPI:
     from app.routers.notifications import router as notifications_router
 
     application.include_router(auth_router, prefix="/auth")
+    application.include_router(auth_google_router, prefix="/auth/google")
     application.include_router(issues_router, prefix="/issues")
     application.include_router(departments_router, prefix="/departments")
     application.include_router(admin_router)
