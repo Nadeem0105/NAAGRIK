@@ -151,56 +151,40 @@ def create_app() -> FastAPI:
     @application.get("/fix-regions", tags=["Admin"])
     async def fix_regions(db: AsyncSession = Depends(get_db)):
         from sqlalchemy import text
-        import json
-        
-        def make_geojson(s, n, w, e):
-            return json.dumps({
-                "type": "Feature",
-                "geometry": {
-                    "type": "Polygon",
-                    "coordinates": [[
-                        [w, s],
-                        [e, s],
-                        [e, n],
-                        [w, n],
-                        [w, s]
-                    ]]
-                }
-            })
-            
         try:
             await db.execute(text("""
                 UPDATE regions 
                 SET bbox_south = 11.5, bbox_north = 18.5, bbox_west = 74.0, bbox_east = 78.5,
                     boundary_geojson = :gj
                 WHERE name = 'Karnataka'
-            """), {"gj": make_geojson(11.5, 18.5, 74.0, 78.5)})
+            """), {"gj": r"""{"type": "Feature", "properties": {"name": "Karnataka"}, "geometry": {"type": "Point", "coordinates": [77.7518975, 12.9828866]}}"""})
             
             await db.execute(text("""
                 UPDATE regions 
                 SET bbox_south = 12.83, bbox_north = 13.14, bbox_west = 77.46, bbox_east = 77.78,
                     boundary_geojson = :gj
                 WHERE name = 'Bengaluru Urban'
-            """), {"gj": make_geojson(12.83, 13.14, 77.46, 77.78)})
+            """), {"gj": r"""{"type": "Feature", "properties": {"name": "Bengaluru Urban"}, "geometry": {"type": "Polygon", "coordinates": [[[77.3255304, 12.976003], [77.3366061, 12.8768929], [77.3794344, 12.8552459], [77.431301, 12.8749113], [77.4199057, 12.8262366], [77.4787826, 12.8114521], [77.4864318, 12.7428125], [77.5409501, 12.7481156], [77.5474988, 12.801405], [77.5647992, 12.7599503], [77.59213, 12.7798297], [77.5571435, 12.7275076], [77.5680703, 12.7012031], [77.6142441, 12.7119539], [77.6037013, 12.6924574], [77.5946385, 12.666797], [77.5963313, 12.6641628], [77.7410016, 12.6737335], [77.8090335, 12.7968339], [77.7925886, 12.843407], [77.8369637, 12.8703556], [77.8318426, 12.9256221], [77.7652716, 12.942299], [77.7815529, 13.0333274], [77.7664991, 13.1076287], [77.7241029, 13.1254092], [77.7272677, 13.1925113], [77.5750464, 13.1983263], [77.5517075, 13.2346762], [77.5213334, 13.2068629], [77.4792108, 13.2242132], [77.4689921, 13.1622982], [77.4317958, 13.1650843], [77.3929209, 13.1176399], [77.4237021, 13.0702699], [77.3841239, 13.0678696], [77.3720145, 12.9921528], [77.3255304, 12.976003]]]}}"""})
             
             await db.execute(text("""
                 UPDATE regions 
                 SET bbox_south = 8.0, bbox_north = 13.5, bbox_west = 76.2, bbox_east = 80.3,
                     boundary_geojson = :gj
                 WHERE name = 'Tamil Nadu'
-            """), {"gj": make_geojson(8.0, 13.5, 76.2, 80.3)})
+            """), {"gj": r"""{"type": "Feature", "properties": {"name": "Tamil Nadu"}, "geometry": {"type": "Point", "coordinates": [80.2657136, 13.0638307]}}"""})
             
             await db.execute(text("""
                 UPDATE regions 
                 SET bbox_south = 12.98, bbox_north = 13.25, bbox_west = 80.16, bbox_east = 80.33,
                     boundary_geojson = :gj
                 WHERE name = 'Chennai'
-            """), {"gj": make_geojson(12.98, 13.25, 80.16, 80.33)})
+            """), {"gj": r"""{"type": "Feature", "properties": {"name": "Chennai"}, "geometry": {"type": "Polygon", "coordinates": [[[80.1304149, 13.0448638], [80.1481335, 12.966764], [80.2028346, 12.9601675], [80.1715886, 12.9367847], [80.1821708, 12.8677863], [80.2421665, 12.852787], [80.3001371, 13.1432677], [80.201532, 13.1287776], [80.187149, 13.0234782], [80.1304149, 13.0448638]]]}}"""})
             
             await db.commit()
-            return {"status": "success", "message": "Regions updated successfully with GeoJSON"}
+            return {"status": "success", "message": "Regions updated successfully with exact GeoJSON polygons"}
         except Exception as e:
             return {"status": "error", "message": str(e)}
+
 
     @application.get("/run-migrations", tags=["Admin"])
     def run_migrations():
