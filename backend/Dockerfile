@@ -20,5 +20,5 @@ COPY . .
 # Cloud Run sets the PORT environment variable. We use 8080 by default.
 ENV PORT 8080
 
-# Run the FastAPI application using uvicorn
-CMD exec uvicorn app.main:app --host 0.0.0.0 --port $PORT
+# Run the FastAPI application using uvicorn with proxy headers enabled for Cloud Run
+CMD exec uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips='*'
