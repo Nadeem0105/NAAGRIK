@@ -147,29 +147,6 @@ def create_app() -> FastAPI:
             }
         )
 
-    # Temporary Seed route
-    @application.get("/seed", tags=["Admin"])
-    async def seed_database():
-        import sys
-        import os
-        import traceback
-        backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        if backend_dir not in sys.path:
-            sys.path.append(backend_dir)
-        try:
-            # 1. Run migrations to ensure DB schema is up to date
-            from alembic import command
-            from alembic.config import Config
-            alembic_cfg = Config(os.path.join(backend_dir, "alembic.ini"))
-            command.upgrade(alembic_cfg, "head")
-            
-            # 2. Seed database
-            from scripts.seed import seed_data
-            await seed_data()
-            return JSONResponse(status_code=200, content={"status": "success", "message": "Migrations applied and database seeded successfully!"})
-        except Exception as e:
-            return JSONResponse(status_code=500, content={"status": "error", "message": str(e), "traceback": traceback.format_exc()})
-
 
     # Add Session Middleware for OAuth
     from starlette.middleware.sessions import SessionMiddleware
