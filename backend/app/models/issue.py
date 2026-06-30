@@ -54,7 +54,7 @@ class Issue(Base):
     # Self-referential relationship for duplicates
     duplicates = relationship("Issue", backref="duplicate_parent", remote_side=[id])
     
-    verifications = relationship("Verification", back_populates="issue")
-    comments = relationship("Comment", back_populates="issue")
-    status_history = relationship("StatusHistory", back_populates="issue")
+    verifications = relationship("Verification", back_populates="issue", cascade="all, delete-orphan")
+    comments = relationship("Comment", back_populates="issue", cascade="all, delete-orphan")
+    status_history = relationship("StatusHistory", back_populates="issue", cascade="all, delete-orphan")
     followers = relationship("IssueFollower", back_populates="issue", cascade="all, delete-orphan")

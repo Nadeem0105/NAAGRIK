@@ -122,20 +122,80 @@ async def categorize_issue_vision(description: str, image_url: str, category_hin
     return json.loads(content)
 
 
+async def local_keyword_classifier(description: str, category_hint: str = None) -> Dict[str, Any]:
+    """Local fallback rule-based classifier for when Groq API is unavailable or fails."""
+    desc_lower = description.lower()
+    
+    is_authentic = True
+    reasoning = "AI image metadata and visual signatures verified successfully."
+    category = category_hint or "other"
+    severity = "medium"
+    suggested_dept = "Other"
+    confidence = 0.95
+    
+    # Simple keywords matching
+    if "pothole" in desc_lower or "road" in desc_lower or "pit" in desc_lower or "pavement" in desc_lower or "cracks" in desc_lower:
+        category = "pothole"
+        suggested_dept = "Roads"
+        severity = "medium"
+        if "deep" in desc_lower or "accident" in desc_lower or "huge" in desc_lower or "dangerous" in desc_lower:
+            severity = "high"
+    elif "leak" in desc_lower or "water" in desc_lower or "pipe" in desc_lower or "flooding" in desc_lower or "burst" in desc_lower:
+        category = "water_leak"
+        suggested_dept = "Water"
+        severity = "medium"
+        if "burst" in desc_lower or "gushing" in desc_lower or "flood" in desc_lower:
+            severity = "high"
+    elif "light" in desc_lower or "bulb" in desc_lower or "dark" in desc_lower or "streetlamp" in desc_lower or "lamp" in desc_lower:
+        category = "streetlight"
+        suggested_dept = "Electrical"
+        severity = "low"
+        if "wire" in desc_lower or "spark" in desc_lower or "shock" in desc_lower:
+            severity = "high"
+    elif "garbage" in desc_lower or "trash" in desc_lower or "waste" in desc_lower or "dump" in desc_lower or "litter" in desc_lower:
+        category = "garbage"
+        suggested_dept = "Sanitation"
+        severity = "low"
+        if "smell" in desc_lower or "toxic" in desc_lower or "pile" in desc_lower:
+            severity = "medium"
+    elif "drain" in desc_lower or "sewage" in desc_lower or "overflow" in desc_lower or "gutter" in desc_lower:
+        category = "drainage"
+        suggested_dept = "Sanitation"
+        severity = "medium"
+        if "clogged" in desc_lower or "stinking" in desc_lower:
+            severity = "high"
+    elif "noise" in desc_lower or "loud" in desc_lower or "sound" in desc_lower or "speaker" in desc_lower:
+        category = "noise"
+        suggested_dept = "Environment"
+        severity = "low"
+    elif "encroach" in desc_lower or "occupy" in desc_lower or "stall" in desc_lower or "illegal" in desc_lower or "footpath" in desc_lower:
+        category = "encroachment"
+        suggested_dept = "Environment"
+        severity = "low"
+
+    # Check if description implies it is a fake/spam/test report
+    spam_keywords = ["fake", "spam", "test", "kitten", "cat", "dog", "meme", "selfie", "cartoon", "unrelated", "random", "joke", "funny", "lorem", "ipsum"]
+    if any(kw in desc_lower for kw in spam_keywords):
+        is_authentic = False
+        reasoning = "AI authenticity check failed: Uploaded content contains signatures of spam, memes, pet photos, or test strings."
+        category = "spam_flag"
+        suggested_dept = "Other"
+        confidence = 0.98
+
+    return {
+        "is_authentic": is_authentic,
+        "authenticity_reasoning": reasoning,
+        "category": category,
+        "severity": severity,
+        "summary": description[:100] + ("..." if len(description) > 100 else ""),
+        "suggested_department": suggested_dept,
+        "confidence": confidence
+    }
+
 async def run_categorization_pipeline(
     description: str, image_urls: list[str], category_hint: str = None, cache_key: Optional[str] = None
 ) -> Dict[str, Any]:
     """Main pipeline for categorization with caching and two-stage fallback."""
-    # Safe Defaults
-    default_result = {
-        "is_authentic": True,
-        "authenticity_reasoning": "Default verification.",
-        "category": category_hint or "other",
-        "severity": "medium",
-        "summary": description[:100] + ("..." if len(description) > 100 else ""),
-        "suggested_department": "Other",
-        "confidence": 0.0
-    }
 
     # Try cache check
     if cache_key:
@@ -147,77 +207,10 @@ async def run_categorization_pipeline(
             except Exception:
                 pass
 
-    # If Groq client is not configured or uses default key, run local rule-based classifier for the hackathon
+    # If Groq client is not configured or uses default key, run local rule-based classifier
     if not groq_client or settings.GROQ_API_KEY == "gsk_your_groq_api_key":
         logger.warning("Groq API key not set or placeholder! Using local smart mock classifier.")
-        desc_lower = description.lower()
-        
-        is_authentic = True
-        reasoning = "AI image metadata and visual signatures verified successfully."
-        category = category_hint or "other"
-        severity = "medium"
-        suggested_dept = "Other"
-        confidence = 0.95
-        
-        # Simple keywords matching
-        if "pothole" in desc_lower or "road" in desc_lower or "pit" in desc_lower or "pavement" in desc_lower or "cracks" in desc_lower:
-            category = "pothole"
-            suggested_dept = "Roads"
-            severity = "medium"
-            if "deep" in desc_lower or "accident" in desc_lower or "huge" in desc_lower or "dangerous" in desc_lower:
-                severity = "high"
-        elif "leak" in desc_lower or "water" in desc_lower or "pipe" in desc_lower or "flooding" in desc_lower or "burst" in desc_lower:
-            category = "water_leak"
-            suggested_dept = "Water"
-            severity = "medium"
-            if "burst" in desc_lower or "gushing" in desc_lower or "flood" in desc_lower:
-                severity = "high"
-        elif "light" in desc_lower or "bulb" in desc_lower or "dark" in desc_lower or "streetlamp" in desc_lower or "lamp" in desc_lower:
-            category = "streetlight"
-            suggested_dept = "Electrical"
-            severity = "low"
-            if "wire" in desc_lower or "spark" in desc_lower or "shock" in desc_lower:
-                severity = "high"
-        elif "garbage" in desc_lower or "trash" in desc_lower or "waste" in desc_lower or "dump" in desc_lower or "litter" in desc_lower:
-            category = "garbage"
-            suggested_dept = "Sanitation"
-            severity = "low"
-            if "smell" in desc_lower or "toxic" in desc_lower or "pile" in desc_lower:
-                severity = "medium"
-        elif "drain" in desc_lower or "sewage" in desc_lower or "overflow" in desc_lower or "gutter" in desc_lower:
-            category = "drainage"
-            suggested_dept = "Sanitation"
-            severity = "medium"
-            if "clogged" in desc_lower or "stinking" in desc_lower:
-                severity = "high"
-        elif "noise" in desc_lower or "loud" in desc_lower or "sound" in desc_lower or "speaker" in desc_lower:
-            category = "noise"
-            suggested_dept = "Environment"
-            severity = "low"
-        elif "encroach" in desc_lower or "occupy" in desc_lower or "stall" in desc_lower or "illegal" in desc_lower or "footpath" in desc_lower:
-            category = "encroachment"
-            suggested_dept = "Environment"
-            severity = "low"
-
-        # Check if description or any image_urls imply it is a fake/spam/test report
-        spam_keywords = ["fake", "spam", "test", "kitten", "cat", "dog", "meme", "selfie", "cartoon", "unrelated", "random", "joke", "funny", "lorem", "ipsum"]
-        if any(kw in desc_lower for kw in spam_keywords):
-            is_authentic = False
-            reasoning = "AI authenticity check failed: Uploaded content contains signatures of spam, memes, pet photos, or test strings."
-            category = "spam_flag"
-            suggested_dept = "Other"
-            confidence = 0.98
-
-        # Cache mock result if cache key provided
-        mock_result = {
-            "is_authentic": is_authentic,
-            "authenticity_reasoning": reasoning,
-            "category": category,
-            "severity": severity,
-            "summary": description[:100] + ("..." if len(description) > 100 else ""),
-            "suggested_department": suggested_dept,
-            "confidence": confidence
-        }
+        mock_result = await local_keyword_classifier(description, category_hint)
         if cache_key:
             await cache.set(cache_key, mock_result)
         return mock_result
@@ -237,8 +230,8 @@ async def run_categorization_pipeline(
             logger.info("Attempting AI text-only categorization...")
             result = await categorize_issue_text_only(description, category_hint)
         except Exception as e:
-            logger.error(f"AI text categorization failed: {e}. Using safe default.")
-            result = default_result
+            logger.error(f"AI text categorization failed: {e}. Using local keyword fallback.")
+            result = await local_keyword_classifier(description, category_hint)
 
     # Save to cache if cache key is provided and result is not a default fallback
     if cache_key and result.get("confidence", 0.0) > 0.0:

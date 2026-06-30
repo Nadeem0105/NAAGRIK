@@ -25,7 +25,7 @@ class DashboardService:
                 pass
 
         # Build base filter for region, explicitly excluding spam/rejected issues
-        region_filter = [Issue.status != "rejected"]
+        region_filter = [Issue.status.not_in(["rejected", "flagged"]), Issue.category != "spam_flag"]
         if region_ids:
             region_filter.append(Issue.region_id.in_(region_ids))
 
@@ -101,7 +101,8 @@ class DashboardService:
             # Explicitly exclude rejected/spam issues from performance metrics
             issue_filter = [
                 Issue.assigned_department_id == dept.id,
-                Issue.status != "rejected"
+                Issue.status.not_in(["rejected", "flagged"]),
+                Issue.category != "spam_flag"
             ]
             if region_ids:
                 issue_filter.append(Issue.region_id.in_(region_ids))

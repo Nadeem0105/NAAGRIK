@@ -158,8 +158,9 @@ class IssueRepository:
         if exclude_id:
             query = query.where(Issue.id != exclude_id)
             
-        # Only search active/unresolved issues for duplicates (exclude spam/rejected)
-        query = query.where(Issue.status.notin_(["resolved", "rejected"]))
+        # Only search active/unresolved issues for duplicates (exclude spam/rejected/flagged)
+        query = query.where(Issue.status.notin_(["resolved", "rejected", "flagged"]))
+        query = query.where(Issue.category != "spam_flag")
         
         result = await db.execute(query)
         return list(result.scalars().all())
@@ -170,7 +171,8 @@ class IssueRepository:
         
         filters = [
             Issue.created_at >= cutoff_date,
-            Issue.status.notin_(["resolved", "rejected"])
+            Issue.status.notin_(["resolved", "rejected", "flagged"]),
+            Issue.category != "spam_flag"
         ]
         if region_ids:
             filters.append(Issue.region_id.in_(region_ids))
