@@ -202,6 +202,18 @@ def create_app() -> FastAPI:
         except Exception as e:
             return {"status": "error", "message": str(e)}
 
+    @application.get("/run-migrations", tags=["Admin"])
+    def run_migrations():
+        try:
+            from alembic.config import Config
+            from alembic import command
+            alembic_cfg = Config("alembic.ini")
+            command.upgrade(alembic_cfg, "head")
+            return {"status": "success", "message": "Migrations applied successfully"}
+        except Exception as e:
+            import traceback
+            return {"status": "error", "message": str(e), "trace": traceback.format_exc()}
+
 
     # Add Session Middleware for OAuth
     from starlette.middleware.sessions import SessionMiddleware
