@@ -147,6 +147,22 @@ def create_app() -> FastAPI:
             }
         )
 
+    # Temporary Seed route
+    @application.get("/seed", tags=["Admin"])
+    async def seed_database():
+        import sys
+        import os
+        backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        if backend_dir not in sys.path:
+            sys.path.append(backend_dir)
+        try:
+            from scripts.seed import seed_data
+            await seed_data()
+            return JSONResponse(status_code=200, content={"status": "success", "message": "Database seeded successfully!"})
+        except Exception as e:
+            return JSONResponse(status_code=500, content={"status": "error", "message": str(e)})
+
+
     # Add Session Middleware for OAuth
     from starlette.middleware.sessions import SessionMiddleware
     application.add_middleware(SessionMiddleware, secret_key=settings.JWT_SECRET_KEY)
