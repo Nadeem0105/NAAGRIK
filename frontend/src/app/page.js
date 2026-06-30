@@ -89,21 +89,21 @@ export default function LandingPage() {
         
         {/* HERO SECTION */}
         <section className={styles.heroSection}>
-          <div className={styles.civicBadge}>
+          <div className={`${styles.civicBadge} animate-fade-in-up`}>
             <Shield size={14} />
             <span className="label-caps">
               {stats ? `${stats.total_reported.toLocaleString()} ISSUES REPORTED` : '14,320 ISSUES REPORTED'} THIS WEEK
             </span>
           </div>
-          <h1 className={styles.heroTitle}>NAGARIK</h1>
-          <p className={styles.heroSubtitle}>
+          <h1 className={`${styles.heroTitle} animate-fade-in-up delay-100`}>NAGARIK</h1>
+          <p className={`${styles.heroSubtitle} animate-fade-in-up delay-200`}>
             Community issue reporting for your city
           </p>
-          <p className={styles.heroDescription}>
+          <p className={`${styles.heroDescription} animate-fade-in-up delay-300`}>
             Nagarik lets anyone report a pothole, leak, or broken streetlight in minutes, then follow exactly what the city does about it, all the way through to resolved.
           </p>
           
-          <div className={styles.ctaGroup}>
+          <div className={`${styles.ctaGroup} animate-fade-in-up delay-400`}>
             {user ? (
               <Link href="/portal" className="blueprint-btn blueprint-btn-primary">
                 <span>ENTER CITIZEN PORTAL</span>
@@ -124,8 +124,8 @@ export default function LandingPage() {
         </section>
 
         {/* MAP PREVIEW SECTION */}
-        <section className={styles.mapSection}>
-          <div className={styles.mapCard}>
+        <section className={`${styles.mapSection} animate-fade-in-up delay-500`}>
+          <div className={`${styles.mapCard} animate-float`}>
             <div className={styles.mapHeader}>
               <span className={styles.mapTitle}>Map Preview</span>
               <span className={styles.mapSub}>Live issue map</span>
@@ -164,7 +164,7 @@ export default function LandingPage() {
 
             <div className={styles.featuresGrid}>
               {/* Feature 1 */}
-              <div className={styles.featureCard}>
+              <div className={`${styles.featureCard} animate-fade-in-up delay-100`}>
                 <div className={styles.featureIconWrapper}>
                   <Camera size={20} />
                 </div>
@@ -175,7 +175,7 @@ export default function LandingPage() {
               </div>
 
               {/* Feature 2 */}
-              <div className={styles.featureCard}>
+              <div className={`${styles.featureCard} animate-fade-in-up delay-200`}>
                 <div className={styles.featureIconWrapper}>
                   <Sparkles size={20} />
                 </div>
@@ -186,7 +186,7 @@ export default function LandingPage() {
               </div>
 
               {/* Feature 3 */}
-              <div className={styles.featureCard}>
+              <div className={`${styles.featureCard} animate-fade-in-up delay-300`}>
                 <div className={styles.featureIconWrapper}>
                   <Users size={20} />
                 </div>
@@ -197,7 +197,7 @@ export default function LandingPage() {
               </div>
 
               {/* Feature 4 */}
-              <div className={styles.featureCard}>
+              <div className={`${styles.featureCard} animate-fade-in-up delay-400`}>
                 <div className={styles.featureIconWrapper}>
                   <GitCommit size={20} />
                 </div>
@@ -208,7 +208,7 @@ export default function LandingPage() {
               </div>
 
               {/* Feature 5 */}
-              <div className={styles.featureCard}>
+              <div className={`${styles.featureCard} animate-fade-in-up delay-500`}>
                 <div className={styles.featureIconWrapper}>
                   <Trophy size={20} />
                 </div>
@@ -219,7 +219,7 @@ export default function LandingPage() {
               </div>
 
               {/* Feature 6 */}
-              <div className={styles.featureCard}>
+              <div className={`${styles.featureCard} animate-fade-in-up delay-600`}>
                 <div className={styles.featureIconWrapper}>
                   <Map size={20} />
                 </div>
@@ -247,7 +247,7 @@ export default function LandingPage() {
             <>
               <div className={styles.statsGrid}>
                 {/* KPI 1: Total Resolved */}
-                <div className={styles.statCard}>
+                <div className={`${styles.statCard} animate-fade-in-up delay-100`}>
                   <div className={styles.statCardHeader}>
                     <span className={styles.statTitle}>Total resolved</span>
                     <CheckCircle2 size={16} className={styles.successIcon} />
@@ -264,7 +264,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* KPI 2: Resolution Rate */}
-                <div className={styles.statCard}>
+                <div className={`${styles.statCard} animate-fade-in-up delay-200`}>
                   <div className={styles.statCardHeader}>
                     <span className={styles.statTitle}>Resolution rate</span>
                     <Activity size={16} className={styles.infoIcon} />
@@ -282,7 +282,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* KPI 3: Avg Resolution */}
-                <div className={styles.statCard}>
+                <div className={`${styles.statCard} animate-fade-in-up delay-300`}>
                   <div className={styles.statCardHeader}>
                     <span className={styles.statTitle}>Avg resolution</span>
                     <Clock size={16} className={styles.warningIcon} />
@@ -300,7 +300,7 @@ export default function LandingPage() {
               {stats && (
                 <div className={styles.detailsGrid}>
                   {/* Category Breakdown */}
-                  <div className={styles.detailsCard}>
+                  <div className={`${styles.detailsCard} animate-fade-in-up delay-400`}>
                     <div className={styles.detailsCardHeader}>
                       <span className={styles.detailsCardTitle}>Category Breakdown</span>
                     </div>
@@ -323,7 +323,7 @@ export default function LandingPage() {
                   </div>
 
                   {/* Resolution Status */}
-                  <div className={styles.detailsCard}>
+                  <div className={`${styles.detailsCard} animate-fade-in-up delay-500`}>
                     <div className={styles.detailsCardHeader}>
                       <span className={styles.detailsCardTitle}>Resolution Status</span>
                     </div>

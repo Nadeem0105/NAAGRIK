@@ -120,7 +120,7 @@ export default function ReportIssuePage() {
       <div className={styles.container}>
         
         {/* Contextual header */}
-        <header className={styles.formHeader}>
+        <header className={`${styles.formHeader} animate-fade-in-up`}>
           <button className={styles.cancelBtn} onClick={() => router.push('/portal')}>
             <X size={16} />
             <span className="label-caps">CANCEL REPORT</span>
@@ -130,7 +130,7 @@ export default function ReportIssuePage() {
         </header>
 
         {/* The Card Form container */}
-        <main className={styles.blueprintCard}>
+        <main className={`${styles.blueprintCard} animate-scale-up delay-100`}>
           {/* Stepper progress */}
           <div className={styles.stepper}>
             <div className={`${styles.stepIndicator} ${step >= 1 ? styles.stepActive : ''}`}>
@@ -148,7 +148,7 @@ export default function ReportIssuePage() {
           </div>
 
           {error && (
-            <div className={styles.errorAlert}>
+            <div className={`${styles.errorAlert} animate-scale-up`}>
               <ShieldAlert size={16} />
               <span>{error}</span>
             </div>
@@ -159,7 +159,7 @@ export default function ReportIssuePage() {
             
             {/* STEP 1: MEDIA UPLOAD */}
             {step === 1 && (
-              <div className={styles.stepContent}>
+              <div className={`${styles.stepContent} animate-fade-in-up`}>
                 <div className={styles.sectionTitleRow}>
                   <h3 className="label-caps">Upload Photo Evidence</h3>
                   <div className={styles.line}></div>
@@ -197,7 +197,7 @@ export default function ReportIssuePage() {
 
             {/* STEP 2: GEOLOCATION MAP */}
             {step === 2 && (
-              <div className={styles.stepContent}>
+              <div className={`${styles.stepContent} animate-fade-in-up`}>
                 <div className={styles.sectionTitleRow}>
                   <h3 className="label-caps">Select Location</h3>
                   <div className={styles.line}></div>
@@ -246,7 +246,7 @@ export default function ReportIssuePage() {
 
             {/* STEP 3: DETAILS */}
             {step === 3 && (
-              <div className={styles.stepContent}>
+              <div className={`${styles.stepContent} animate-fade-in-up`}>
                 <div className={styles.sectionTitleRow}>
                   <h3 className="label-caps">Category & Details</h3>
                   <div className={styles.line}></div>

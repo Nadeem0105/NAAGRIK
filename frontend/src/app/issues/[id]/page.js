@@ -178,7 +178,7 @@ export default function IssueDetailPage({ params }) {
       <div className={styles.container}>
         
         {/* Back Link & Follow Row */}
-        <div className={styles.topActionRow}>
+        <div className={`${styles.topActionRow} animate-fade-in-up`}>
           <Link href="/portal" className={styles.backLink}>
             <ArrowLeft size={16} />
             <span className="label-caps">Back to Portal</span>
@@ -206,7 +206,7 @@ export default function IssueDetailPage({ params }) {
         </div>
 
         {error && !issue ? (
-          <div className={styles.errorContainer}>
+          <div className={`${styles.errorContainer} animate-scale-up`}>
             <h3 className="label-caps">REPORT LOG CORRUPT</h3>
             <p className="utility-code">{error}</p>
           </div>
@@ -214,7 +214,7 @@ export default function IssueDetailPage({ params }) {
           <div className={styles.contentLayout}>
             
             {/* LEFT COLUMN: Main Issue Details */}
-            <div className={styles.mainCol}>
+            <div className={`${styles.mainCol} animate-fade-in-up delay-100`}>
               
               {/* Header block */}
               <header className={styles.issueHeader}>
@@ -232,7 +232,7 @@ export default function IssueDetailPage({ params }) {
               </header>
 
               {/* Before/After Visual Evidence Section */}
-              <section className={styles.evidenceSection}>
+              <section className={`${styles.evidenceSection} animate-fade-in-up delay-200`}>
                 <div className={styles.sectionHeader}>
                   <span className="label-caps">Visual Audit Evidence</span>
                   <div className={styles.line}></div>
@@ -285,7 +285,7 @@ export default function IssueDetailPage({ params }) {
               </section>
 
               {/* Geolocation Log */}
-              <section className={styles.locationSection}>
+              <section className={`${styles.locationSection} animate-fade-in-up delay-300`}>
                 <div className={styles.sectionHeader}>
                   <span className="label-caps">Geolocation Log</span>
                   <div className={styles.line}></div>
@@ -302,7 +302,7 @@ export default function IssueDetailPage({ params }) {
               </section>
 
               {/* Citizen Endorsement & Verification Actions */}
-              <section className={styles.actionsSection}>
+              <section className={`${styles.actionsSection} animate-fade-in-up delay-400`}>
                 <button className={`${styles.actionButton} blueprint-btn`} onClick={handleUpvote}>
                   <ThumbsUp size={16} />
                   <span>ENDORSE REPORT ({issue.upvotes_count || 0})</span>
@@ -314,27 +314,30 @@ export default function IssueDetailPage({ params }) {
               </section>
 
               {/* Field Notes / Comments Thread */}
-              <section className={styles.commentsSection}>
+              <section className={`${styles.commentsSection} animate-fade-in-up delay-500`}>
                 <div className={styles.sectionHeader}>
                   <span className="label-caps">Field Notes Discussion ({comments.length})</span>
                   <div className={styles.line}></div>
                 </div>
 
                 <div className={styles.commentList}>
-                  {comments.map(c => (
-                    <div key={c.id} className={styles.commentCard}>
-                      <div className={styles.commentAvatar}>
-                        <User size={16} />
-                      </div>
-                      <div className={styles.commentBody}>
-                        <div className={styles.commentMeta}>
-                          <span className={styles.commentUser}>{c.user_name || 'Citizen'}</span>
-                          <span className="utility-code">{new Date(c.created_at).toLocaleString()}</span>
+                  {comments.map((c, index) => {
+                    const delayClass = `delay-${Math.min((index + 1) * 100, 800)}`;
+                    return (
+                      <div key={c.id} className={`${styles.commentCard} animate-fade-in-up ${delayClass}`}>
+                        <div className={styles.commentAvatar}>
+                          <User size={16} />
                         </div>
-                        <p className={styles.commentText}>{c.content}</p>
+                        <div className={styles.commentBody}>
+                          <div className={styles.commentMeta}>
+                            <span className={styles.commentUser}>{c.user_name || 'Citizen'}</span>
+                            <span className="utility-code">{new Date(c.created_at).toLocaleString()}</span>
+                          </div>
+                          <p className={styles.commentText}>{c.content}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
 
                   {comments.length === 0 && (
                     <div className={styles.emptyComments}>
@@ -372,7 +375,7 @@ export default function IssueDetailPage({ params }) {
             <div className={styles.sideCol}>
               
               {/* SLA countdown clock */}
-              <div className={`${styles.sideCard} blueprint-card`}>
+              <div className={`${styles.sideCard} blueprint-card animate-slide-in-right delay-200`}>
                 <span className="label-caps mb-2 block">Resolution Timer</span>
                 <div className={`${styles.slaClock} utility-code ${timeLeft === 'SLA BREACHED' ? styles.slaBreached : ''}`}>
                   {timeLeft}
@@ -381,7 +384,7 @@ export default function IssueDetailPage({ params }) {
               </div>
 
               {/* Status Timeline lifecycle */}
-              <div className={`${styles.sideCard} blueprint-card`}>
+              <div className={`${styles.sideCard} blueprint-card animate-slide-in-right delay-300`}>
                 <span className="label-caps mb-4 block">Status Timeline</span>
                 <div className={styles.timeline}>
                   

@@ -26,15 +26,19 @@ export const metadata = {
   description: "Report local issues, track resolution, earn points, and make your community a better place.",
 };
 
+import { AppShell } from "@/components/AppShell";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${archivo.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable}`}>
       <body>
         <AppProvider>
-          <Navbar />
-          <main style={{ minHeight: "calc(100vh - 64px)", display: "flex", flexDirection: "column", paddingTop: "88px" }}>
-            {children}
-          </main>
+          <AppShell>
+            <Navbar />
+            <main style={{ minHeight: "calc(100vh - 64px)", display: "flex", flexDirection: "column", paddingTop: "88px" }}>
+              {children}
+            </main>
+          </AppShell>
         </AppProvider>
       </body>
     </html>

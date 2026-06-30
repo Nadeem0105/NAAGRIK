@@ -20,6 +20,7 @@ export default function ExploreMapPage() {
   // Map References
   const mapRef = useRef(null);
   const markersRef = useRef([]);
+  const boundaryLayerRef = useRef(null);
   const [leafletReady, setLeafletReady] = useState(false);
   const [mapLoaded, setMapLoaded] = useState(false);
 
@@ -98,34 +99,8 @@ export default function ExploreMapPage() {
           zoomControl: false
         });
 
-        if (user?.region?.bbox) {
-          const { south, north, west, east } = user.region.bbox;
-          map.fitBounds([[south, west], [north, east]], { padding: [20, 20] });
-        } else {
-          map.setView([12.9716, 77.5946], 12); // Fallback to Bangalore
-          if (typeof window !== 'undefined' && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-              (position) => {
-                const { latitude, longitude } = position.coords;
-                map.setView([latitude, longitude], 12);
-              },
-              (err) => console.warn('Could not locate user:', err)
-            );
-          }
-        }
-
-        // Render boundary GeoJSON if available
-        if (user?.region?.boundary_geojson) {
-          L.geoJSON(user.region.boundary_geojson, {
-            style: {
-              color: '#2C6E8C',
-              weight: 2,
-              dashArray: '4 4',
-              fillColor: '#2C6E8C',
-              fillOpacity: 0.05
-            }
-          }).addTo(map);
-        }
+        // Set initial view to a safe default (e.g. Delhi) until user location or region is resolved
+        map.setView([28.6139, 77.2090], 11);
 
         // CARTO Voyager Tiles (modern, clean, fits premium blueprint/neon aesthetic)
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
@@ -157,6 +132,54 @@ export default function ExploreMapPage() {
       }
     };
   }, [leafletReady]);
+
+  // 4. Center map and draw boundary GeoJSON when user details or map is loaded
+  useEffect(() => {
+    if (!mapLoaded || !mapRef.current || typeof window === 'undefined' || !window.L) return;
+    const map = mapRef.current;
+    const L = window.L;
+
+    // Remove old boundary layer if it exists
+    if (boundaryLayerRef.current) {
+      map.removeLayer(boundaryLayerRef.current);
+      boundaryLayerRef.current = null;
+    }
+
+    // Render new boundary GeoJSON if available
+    if (user?.region?.boundary_geojson) {
+      boundaryLayerRef.current = L.geoJSON(user.region.boundary_geojson, {
+        style: {
+          color: '#3B82F6',
+          weight: 3,
+          dashArray: '5 5',
+          fillColor: '#3B82F6',
+          fillOpacity: 0.08
+        }
+      }).addTo(map);
+    }
+
+    // Center view
+    if (user?.role === 'admin' && user?.admin_scope === 'super') {
+      map.setView([28.6139, 77.2090], 11); // Super admin gets Delhi centered view, fully scrollable
+    } else if (user?.region?.bbox) {
+      const { south, north, west, east } = user.region.bbox;
+      map.fitBounds([[south, west], [north, east]], { padding: [20, 20] });
+    } else {
+      // Fallback: request browser geolocation and center
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            // Only update view if user is still not loaded with a region
+            if (!user?.region?.bbox) {
+              map.setView([latitude, longitude], 12);
+            }
+          },
+          (err) => console.warn('Could not locate user for initial view:', err)
+        );
+      }
+    }
+  }, [user, mapLoaded]);
 
   // Helper mappings between DB models and UI filters
   const getUIMapCategory = (dbCategory) => {

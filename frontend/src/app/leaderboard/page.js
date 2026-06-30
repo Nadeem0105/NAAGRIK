@@ -96,7 +96,7 @@ export default function LeaderboardPage() {
       <div className={styles.container}>
         
         {/* Header */}
-        <header className={styles.header}>
+        <header className={`${styles.header} animate-fade-in-up`}>
           <span className="label-caps text-route-blue">CIVIC METRICS DATABASE</span>
           <h1 className={styles.title}>Contribution Leaderboard</h1>
           <p className={styles.subtitle}>
@@ -106,7 +106,7 @@ export default function LeaderboardPage() {
 
         {/* Onboarding Gate for Citizens without State */}
         {isCitizenWithoutState && (
-          <div className={styles.onboardingCard}>
+          <div className={`${styles.onboardingCard} animate-scale-up`}>
             <div className={styles.scopeLabel}>DIVISION REGISTRATION REQUIRED</div>
             <h2 className={styles.onboardingTitle}>Select Your State to Join</h2>
             <p className={styles.onboardingText}>
@@ -146,7 +146,7 @@ export default function LeaderboardPage() {
         )}
 
         <div className={styles.grid}>
-          <main className={styles.mainContent}>
+          <main className={`${styles.mainContent} animate-fade-in-up delay-100`}>
             
             {/* Super Admin State Filter / Scope Label Row */}
             <div className={styles.adminFilterRow}>
@@ -196,12 +196,13 @@ export default function LeaderboardPage() {
                   </div>
                 ) : (
                   <div className={styles.tableBody}>
-                    {leaders.map((leader) => {
+                    {leaders.map((leader, index) => {
                       const isTopThree = leader.rank <= 3;
+                      const delayClass = `delay-${Math.min((index + 1) * 100, 800)}`;
                       return (
                         <div
                           key={leader.user_id}
-                          className={`${styles.row} ${isTopThree ? styles.topThreeRow : ''}`}
+                          className={`${styles.row} ${isTopThree ? `${styles.topThreeRow} animate-pulse-glow` : ''} animate-fade-in-up ${delayClass}`}
                         >
                           <div className={`${styles.rankCol} utility-code ${isTopThree ? styles.amberText : ''}`} style={{ fontFamily: 'var(--font-mono)' }}>
                             #{String(leader.rank).padStart(2, '0')}
@@ -255,7 +256,7 @@ export default function LeaderboardPage() {
           <aside className={styles.sideContent}>
             
             {/* Scoring method */}
-            <div className={`${styles.sideCard} blueprint-card`}>
+            <div className={`${styles.sideCard} blueprint-card animate-slide-in-right delay-200`}>
               <span className="label-caps mb-4 block">SCORING METHODOLOGY</span>
               <ul className={styles.methodList}>
                 <li className={styles.methodItem}>
@@ -283,7 +284,7 @@ export default function LeaderboardPage() {
             </div>
 
             {/* Active protocols */}
-            <div className={`${styles.sideCard} blueprint-card`}>
+            <div className={`${styles.sideCard} blueprint-card animate-slide-in-right delay-300`}>
               <span className="label-caps mb-4 block">ACTIVE PROTOCOLS</span>
               <div className={styles.protocolCard}>
                 <div className={styles.protocolTitle}>Operation Clear Path</div>
@@ -304,7 +305,7 @@ export default function LeaderboardPage() {
 
       {/* Sticky Footer Viewer Rank Card */}
       {user && !isCitizenWithoutState && viewerRank && (
-        <div className={styles.stickyFooter}>
+        <div className={`${styles.stickyFooter} animate-fade-in-up delay-500`}>
           <div className={styles.stickyFooterContent}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
               <div>

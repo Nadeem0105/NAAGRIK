@@ -157,7 +157,7 @@ export default function ManageIssuesPage() {
   return (
     <div className={styles.issuesPageContainer}>
       {/* Top Status Header */}
-      <header className={styles.pageHeader}>
+      <header className={`${styles.pageHeader} animate-fade-in-up`}>
         <div>
           <span className="label-caps text-outline">OPERATIONS PORTAL</span>
           <h2 className={styles.pageTitle}>Issue Operations Console</h2>
@@ -174,7 +174,7 @@ export default function ManageIssuesPage() {
       </header>
 
       {error && (
-        <div className={styles.errorAlert}>
+        <div className={`${styles.errorAlert} animate-scale-up`}>
           <AlertTriangle size={16} />
           <span>{error}</span>
         </div>
@@ -182,7 +182,7 @@ export default function ManageIssuesPage() {
 
       <div className={styles.issuesLayout}>
         {/* Table and list of issues */}
-        <div className={`${styles.tableCard} blueprint-card`}>
+        <div className={`${styles.tableCard} blueprint-card animate-fade-in-up delay-100`}>
           <div className={styles.tableResponsive}>
             <table className={styles.table}>
               <thead>
@@ -202,7 +202,7 @@ export default function ManageIssuesPage() {
                 </tr>
               </thead>
               <tbody>
-                {issues.map(issue => (
+                {issues.map((issue, index) => (
                   <tr 
                     key={issue.id} 
                     className={selectedIssueIds.includes(issue.id) ? styles.rowSelected : ''}
@@ -252,7 +252,7 @@ export default function ManageIssuesPage() {
 
         {/* Bulk Action Pane / Sidebar */}
         {selectedIssueIds.length > 0 && (
-          <div className={`${styles.bulkPane} blueprint-card`}>
+          <div className={`${styles.bulkPane} blueprint-card animate-slide-in-right`}>
             <div className={styles.bulkHeader}>
               <span className="label-caps">Bulk Operations ({selectedIssueIds.length} Selected)</span>
               <div className={styles.line}></div>

@@ -102,7 +102,7 @@ export default function CitizenPortalPage() {
       <div className={styles.container}>
         
         {/* Header section */}
-        <div className={styles.header}>
+        <div className={`${styles.header} animate-fade-in-up`}>
           <div>
             <span className="label-caps">CITIZEN DASHBOARD</span>
             <h1 className={styles.title}>Civic Action Feed</h1>
@@ -114,7 +114,7 @@ export default function CitizenPortalPage() {
         </div>
 
         {/* Tab Selection */}
-        <div className={styles.tabsContainer}>
+        <div className={`${styles.tabsContainer} animate-fade-in-up delay-100`}>
           <button 
             className={`${styles.tabBtn} ${activeTab === 'feed' ? styles.tabActive : ''}`}
             onClick={() => setActiveTab('feed')}
@@ -130,7 +130,7 @@ export default function CitizenPortalPage() {
         </div>
 
         {/* Filters Panel */}
-        <div className={styles.filtersPanel}>
+        <div className={`${styles.filtersPanel} animate-fade-in-up delay-200`}>
           <div className={styles.filterGroup}>
             <Filter size={14} className={styles.filterIcon} />
             <select 
@@ -175,75 +175,78 @@ export default function CitizenPortalPage() {
             <span className="utility-code">Updating reports...</span>
           </div>
         ) : displayedIssues.length === 0 ? (
-          <div className={styles.emptyFeed}>
+          <div className={`${styles.emptyFeed} animate-scale-up`}>
             <AlertTriangle size={32} className={styles.emptyIcon} />
             <h3>No reports found</h3>
             <p className={styles.emptyText}>Adjust filters or register a new civic issue report in your district.</p>
           </div>
         ) : (
           <div className={styles.feedGrid}>
-            {displayedIssues.map(issue => (
-              <Link 
-                href={`/issues/${issue.id}`} 
-                key={issue.id} 
-                className={`${styles.issueCard} blueprint-card blueprint-card-interactive`}
-              >
-                <div className={styles.cardHeader}>
-                  <div className={styles.metaLeft}>
-                    <div className={`${styles.statusBadge} ${getStatusBadgeClass(issue.status)}`}>
-                      <span>{issue.status.replace('_', ' ').toUpperCase()}</span>
+            {displayedIssues.map((issue, index) => {
+              const delayClass = `delay-${((index % 6) + 1) * 100}`;
+              return (
+                <Link 
+                  href={`/issues/${issue.id}`} 
+                  key={issue.id} 
+                  className={`${styles.issueCard} blueprint-card blueprint-card-interactive animate-fade-in-up ${delayClass}`}
+                >
+                  <div className={styles.cardHeader}>
+                    <div className={styles.metaLeft}>
+                      <div className={`${styles.statusBadge} ${getStatusBadgeClass(issue.status)}`}>
+                        <span>{issue.status.replace('_', ' ').toUpperCase()}</span>
+                      </div>
+                      <div className={`${styles.severityBadge} ${getSeverityBadgeClass(issue.severity)}`}>
+                        <span>{issue.severity.toUpperCase()}</span>
+                      </div>
                     </div>
-                    <div className={`${styles.severityBadge} ${getSeverityBadgeClass(issue.severity)}`}>
-                      <span>{issue.severity.toUpperCase()}</span>
-                    </div>
-                  </div>
-                  <span className="utility-code text-outline">{issue.id}</span>
-                </div>
-
-                <div className={styles.cardBody}>
-                  <h3 className={styles.issueTitle}>{issue.title}</h3>
-                  <p className={styles.issueDesc}>{issue.description}</p>
-                </div>
-
-                <div className={styles.cardFooter}>
-                  <div className={styles.metaRow}>
-                    <div className={styles.metaItem}>
-                      <Tag size={14} />
-                      <span>{issue.category}</span>
-                    </div>
-                    <div className={styles.metaItem}>
-                      <MapPin size={14} />
-                      <span>{issue.latitude?.toFixed(4)}, {issue.longitude?.toFixed(4)}</span>
-                    </div>
-                    <div className={styles.metaItem}>
-                      <Clock size={14} />
-                      <span>{new Date(issue.created_at).toLocaleDateString()}</span>
-                    </div>
+                    <span className="utility-code text-outline">{issue.id}</span>
                   </div>
 
-                  <div className={styles.actionRow}>
-                    {/* Upvote */}
-                    <button 
-                      className={`${styles.actionBtn} ${styles.upvoteBtn}`} 
-                      onClick={(e) => handleUpvote(issue.id, e)}
-                      title="Upvote issue significance"
-                    >
-                      <ThumbsUp size={14} />
-                      <span>{issue.upvotes_count || 0}</span>
-                    </button>
-                    {/* Verify */}
-                    <button 
-                      className={`${styles.actionBtn} ${styles.verifyBtn}`} 
-                      onClick={(e) => handleVerify(issue.id, e)}
-                      title="Verify issue presence"
-                    >
-                      <CheckSquare size={14} />
-                      <span>{issue.verifications_count || 0}</span>
-                    </button>
+                  <div className={styles.cardBody}>
+                    <h3 className={styles.issueTitle}>{issue.title}</h3>
+                    <p className={styles.issueDesc}>{issue.description}</p>
                   </div>
-                </div>
-              </Link>
-            ))}
+
+                  <div className={styles.cardFooter}>
+                    <div className={styles.metaRow}>
+                      <div className={styles.metaItem}>
+                        <Tag size={14} />
+                        <span>{issue.category}</span>
+                      </div>
+                      <div className={styles.metaItem}>
+                        <MapPin size={14} />
+                        <span>{issue.latitude?.toFixed(4)}, {issue.longitude?.toFixed(4)}</span>
+                      </div>
+                      <div className={styles.metaItem}>
+                        <Clock size={14} />
+                        <span>{new Date(issue.created_at).toLocaleDateString()}</span>
+                      </div>
+                    </div>
+
+                    <div className={styles.actionRow}>
+                      {/* Upvote */}
+                      <button 
+                        className={`${styles.actionBtn} ${styles.upvoteBtn}`} 
+                        onClick={(e) => handleUpvote(issue.id, e)}
+                        title="Upvote issue significance"
+                      >
+                        <ThumbsUp size={14} />
+                        <span>{issue.upvotes_count || 0}</span>
+                      </button>
+                      {/* Verify */}
+                      <button 
+                        className={`${styles.actionBtn} ${styles.verifyBtn}`} 
+                        onClick={(e) => handleVerify(issue.id, e)}
+                        title="Verify issue presence"
+                      >
+                        <CheckSquare size={14} />
+                        <span>{issue.verifications_count || 0}</span>
+                      </button>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         )}
 
