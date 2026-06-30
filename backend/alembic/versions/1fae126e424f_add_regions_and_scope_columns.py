@@ -32,10 +32,7 @@ def upgrade() -> None:
     op.create_index(op.f('ix_regions_name'), 'regions', ['name'], unique=False)
     op.add_column('departments', sa.Column('region_id', sa.Uuid(), nullable=True))
     op.create_foreign_key(None, 'departments', 'regions', ['region_id'], ['id'], ondelete='SET NULL')
-    op.alter_column('issue_followers', 'created_at',
-               existing_type=postgresql.TIMESTAMP(),
-               nullable=False,
-               existing_server_default=sa.text("timezone('utc'::text, now())"))
+
     op.add_column('issues', sa.Column('region_id', sa.Uuid(), nullable=True))
     op.create_index(op.f('ix_issues_region_id'), 'issues', ['region_id'], unique=False)
     op.create_foreign_key(None, 'issues', 'regions', ['region_id'], ['id'], ondelete='SET NULL')
