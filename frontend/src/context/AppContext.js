@@ -81,7 +81,7 @@ export function AppProvider({ children }) {
   // Handle redirect if not logged in
   // Public paths: landing, auth pages, and read-only data pages (leaderboard, explore, issue details)
   useEffect(() => {
-    const publicPaths = ['/', '/login', '/register', '/leaderboard', '/explore'];
+    const publicPaths = ['/', '/login', '/register', '/leaderboard', '/explore', '/auth/callback'];
     const isPublicPath = publicPaths.includes(pathname) || pathname.startsWith('/issues/');
     if (!loading && !user && !isPublicPath) {
       router.push('/login');
