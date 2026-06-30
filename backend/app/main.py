@@ -151,29 +151,54 @@ def create_app() -> FastAPI:
     @application.get("/fix-regions", tags=["Admin"])
     async def fix_regions(db: AsyncSession = Depends(get_db)):
         from sqlalchemy import text
+        import json
+        
+        def make_geojson(s, n, w, e):
+            return json.dumps({
+                "type": "Feature",
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [[
+                        [w, s],
+                        [e, s],
+                        [e, n],
+                        [w, n],
+                        [w, s]
+                    ]]
+                }
+            })
+            
         try:
             await db.execute(text("""
                 UPDATE regions 
-                SET bbox_south = 11.5, bbox_north = 18.5, bbox_west = 74.0, bbox_east = 78.5
+                SET bbox_south = 11.5, bbox_north = 18.5, bbox_west = 74.0, bbox_east = 78.5,
+                    boundary_geojson = :gj
                 WHERE name = 'Karnataka'
-            """))
+            """), {"gj": make_geojson(11.5, 18.5, 74.0, 78.5)})
+            
             await db.execute(text("""
                 UPDATE regions 
-                SET bbox_south = 12.83, bbox_north = 13.14, bbox_west = 77.46, bbox_east = 77.78
+                SET bbox_south = 12.83, bbox_north = 13.14, bbox_west = 77.46, bbox_east = 77.78,
+                    boundary_geojson = :gj
                 WHERE name = 'Bengaluru Urban'
-            """))
+            """), {"gj": make_geojson(12.83, 13.14, 77.46, 77.78)})
+            
             await db.execute(text("""
                 UPDATE regions 
-                SET bbox_south = 8.0, bbox_north = 13.5, bbox_west = 76.2, bbox_east = 80.3
+                SET bbox_south = 8.0, bbox_north = 13.5, bbox_west = 76.2, bbox_east = 80.3,
+                    boundary_geojson = :gj
                 WHERE name = 'Tamil Nadu'
-            """))
+            """), {"gj": make_geojson(8.0, 13.5, 76.2, 80.3)})
+            
             await db.execute(text("""
                 UPDATE regions 
-                SET bbox_south = 12.98, bbox_north = 13.25, bbox_west = 80.16, bbox_east = 80.33
+                SET bbox_south = 12.98, bbox_north = 13.25, bbox_west = 80.16, bbox_east = 80.33,
+                    boundary_geojson = :gj
                 WHERE name = 'Chennai'
-            """))
+            """), {"gj": make_geojson(12.98, 13.25, 80.16, 80.33)})
+            
             await db.commit()
-            return {"status": "success", "message": "Regions updated successfully"}
+            return {"status": "success", "message": "Regions updated successfully with GeoJSON"}
         except Exception as e:
             return {"status": "error", "message": str(e)}
 
