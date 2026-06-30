@@ -180,7 +180,7 @@ export default function ManageIssuesPage() {
         </div>
       )}
 
-      <div className={styles.issuesLayout}>
+      <div className={`${styles.issuesLayout} ${selectedIssueIds.length > 0 ? styles.layoutWithSidebar : ''}`}>
         {/* Table and list of issues */}
         <div className={`${styles.tableCard} blueprint-card animate-fade-in-up delay-100`}>
           <div className={styles.tableResponsive}>
