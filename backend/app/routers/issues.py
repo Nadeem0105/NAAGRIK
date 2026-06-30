@@ -70,8 +70,8 @@ from sqlalchemy import select
 async def create_issue(
     request: Request,  # Required by slowapi
     background_tasks: BackgroundTasks,
-    title: str = Form(...),
-    description: str = Form(...),
+    title: str = Form(..., max_length=100),
+    description: str = Form(..., max_length=2000),
     latitude: float = Form(...),
     longitude: float = Form(...),
     category_hint: Optional[str] = Form(None),
@@ -137,8 +137,11 @@ async def list_issues(
                 region_id_filter = current_user.region_id
             elif current_user.admin_scope == "state":
                 state_id_filter = current_user.region_id
-        elif current_user.role == "citizen" and current_user.state_id:
-            state_id_filter = current_user.state_id
+        elif current_user.role == "citizen":
+            if current_user.region_id:
+                region_id_filter = current_user.region_id
+            elif current_user.state_id:
+                state_id_filter = current_user.state_id
 
     offset = (page - 1) * limit
     issues, total = await issue_repo.get_paginated(

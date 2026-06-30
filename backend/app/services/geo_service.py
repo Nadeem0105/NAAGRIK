@@ -31,8 +31,13 @@ async def reverse_geocode(lat: float, lng: float) -> str:
     return f"Location coordinates: ({lat:.5f}, {lng:.5f})"
 
 
+import asyncio
+
 async def fetch_region_geometry(name: str, parent_name: str | None = None) -> dict | None:
     """Query Nominatim's search endpoint to get bbox and GeoJSON boundary."""
+    # Respect Nominatim's strict 1 request/second usage policy for batch operations
+    await asyncio.sleep(1.2)
+    
     query = f"{name}, {parent_name}" if parent_name else name
     url = "https://nominatim.openstreetmap.org/search"
     params = {

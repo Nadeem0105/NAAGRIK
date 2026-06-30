@@ -158,8 +158,8 @@ class IssueRepository:
         if exclude_id:
             query = query.where(Issue.id != exclude_id)
             
-        # Only search active/unresolved issues for duplicates
-        query = query.where(Issue.status != "resolved")
+        # Only search active/unresolved issues for duplicates (exclude spam/rejected)
+        query = query.where(Issue.status.notin_(["resolved", "rejected"]))
         
         result = await db.execute(query)
         return list(result.scalars().all())
@@ -170,7 +170,7 @@ class IssueRepository:
         
         filters = [
             Issue.created_at >= cutoff_date,
-            Issue.status != "resolved"
+            Issue.status.notin_(["resolved", "rejected"])
         ]
         if region_ids:
             filters.append(Issue.region_id.in_(region_ids))
@@ -214,7 +214,7 @@ class IssueRepository:
             .group_by(Verification.type)
         )
         res = await db.execute(stmt)
-        counts = {"upvote": 0, "duplicate_flag": 0, "spam_flag": 0}
+        counts = {"upvote": 0, "duplicate_flag": 0, "spam_flag": 0, "verify": 0}
         for v_type, count in res.all():
             if v_type in counts:
                 counts[v_type] = count

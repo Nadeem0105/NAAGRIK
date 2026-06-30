@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.dependencies import get_current_user
@@ -76,6 +76,13 @@ async def update_my_location_region(
     db: AsyncSession = Depends(get_db)
 ):
     """Resolve coordinates to state/district regions and update the user's location profile."""
+    # Prevent admins from having their fixed jurisdiction overwritten by physical GPS location
+    if current_user.role == "admin":
+        raise HTTPException(
+            status_code=403, 
+            detail="Admin jurisdictions are fixed and cannot be updated via GPS."
+        )
+
     from app.services.geo_service import reverse_geocode_region
     
     state_reg, district_reg = await reverse_geocode_region(payload.latitude, payload.longitude, db)

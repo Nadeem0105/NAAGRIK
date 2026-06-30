@@ -21,12 +21,12 @@ class CommentResponse(BaseModel):
 
 
 class VerificationCreateRequest(BaseModel):
-    type: str = Field(..., examples=["upvote", "duplicate_flag", "spam_flag"])
+    type: str = Field(..., examples=["upvote", "duplicate_flag", "spam_flag", "verify"])
 
     @field_validator("type")
     @classmethod
     def validate_type(cls, v: str) -> str:
-        allowed = ["upvote", "duplicate_flag", "spam_flag"]
+        allowed = ["upvote", "duplicate_flag", "spam_flag", "verify"]
         if v not in allowed:
             raise ValueError(f"Type must be one of: {', '.join(allowed)}")
         return v
