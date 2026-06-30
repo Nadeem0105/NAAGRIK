@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     APP_ENV: str = "development"
     
     # CORS Origins
-    CORS_ORIGINS: Union[str, List[str]] = ["http://localhost:3000", "http://localhost:5173", "http://localhost:8000"]
+    CORS_ORIGINS: Union[str, List[str]] = ["*"]
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod

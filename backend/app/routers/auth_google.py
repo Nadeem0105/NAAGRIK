@@ -23,11 +23,25 @@ oauth.register(
 
 @router.get("/login")
 async def google_login(request: Request):
-    # Ensure GOOGLE_REDIRECT_URI is set or build it dynamically
-    redirect_uri = getattr(settings, 'GOOGLE_REDIRECT_URI', str(request.url_for('google_callback')))
-    # Generate a random state for CSRF protection
+    # Detect the caller's origin/referer to dynamically build the callback and frontend URL
+    referer = request.headers.get("referer") or request.headers.get("origin") or "http://localhost:3000"
+    
+    from urllib.parse import urlparse
+    parsed = urlparse(referer)
+    detected_frontend_url = f"{parsed.scheme}://{parsed.netloc}"
+    
+    # Check if the backend is running on Cloud Run or locally
+    host = request.headers.get("host", "")
+    if "localhost" in host or "127.0.0.1" in host:
+        redirect_uri = "http://localhost:8000/auth/google/callback"
+    else:
+        redirect_uri = "https://nagarik-backend-909339119086.asia-south1.run.app/auth/google/callback"
+
+    # Generate a random state for CSRF protection and store the detected frontend URL
     state = secrets.token_urlsafe(32)
     request.session["oauth_state"] = state
+    request.session["frontend_url"] = detected_frontend_url
+    
     return await oauth.google.authorize_redirect(request, redirect_uri, state=state)
 
 @router.get("/callback")
@@ -80,5 +94,8 @@ async def google_callback(request: Request, db: AsyncSession = Depends(get_db)):
     access_token = create_access_token(subject=user.id, extra_claims=extra_claims)
     
     # We redirect to the frontend callback page passing the token in the URL fragment or query param
-    frontend_url = settings.FRONTEND_URL if hasattr(settings, 'FRONTEND_URL') else "http://localhost:3000"
+    frontend_url = request.session.get("frontend_url")
+    if not frontend_url:
+        frontend_url = settings.FRONTEND_URL if hasattr(settings, 'FRONTEND_URL') else "http://localhost:3000"
+        
     return RedirectResponse(url=f"{frontend_url}/auth/callback?token={access_token}")
