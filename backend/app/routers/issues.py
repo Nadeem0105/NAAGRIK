@@ -153,7 +153,8 @@ async def list_issues(
         severity=severity,
         bbox=bbox_tuple,
         region_id=region_id_filter,
-        state_id=state_id_filter
+        state_id=state_id_filter,
+        visible_to_user_id=current_user.id if current_user else None
     )
 
     items = [await build_issue_response(db, issue, current_user) for issue in issues]

@@ -41,6 +41,7 @@ class IssueRepository:
         bbox: Optional[tuple[float, float, float, float]] = None,  # min_lat, min_lng, max_lat, max_lng
         region_id: Optional[uuid.UUID] = None,
         state_id: Optional[uuid.UUID] = None,
+        visible_to_user_id: Optional[uuid.UUID] = None,
     ) -> tuple[list[Issue], int]:
         # Build query
         query = select(Issue)
@@ -67,12 +68,19 @@ class IssueRepository:
             filters.append(Issue.latitude.between(min_lat, max_lat))
             filters.append(Issue.longitude.between(min_lng, max_lng))
 
+        region_filters = []
         if region_id:
-            filters.append(Issue.region_id == region_id)
+            region_filters.append(Issue.region_id == region_id)
         if state_id:
             from app.models.region import Region
             district_subquery = select(Region.id).where(or_(Region.parent_region_id == state_id, Region.id == state_id))
-            filters.append(Issue.region_id.in_(district_subquery))
+            region_filters.append(Issue.region_id.in_(district_subquery))
+
+        if region_filters:
+            if visible_to_user_id:
+                filters.append(or_(Issue.reporter_id == visible_to_user_id, *region_filters))
+            else:
+                filters.append(or_(*region_filters))
 
         if filters:
             query = query.where(and_(*filters))
