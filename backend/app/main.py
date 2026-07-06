@@ -29,6 +29,15 @@ async def lifespan(application: FastAPI):
     # 1. Initialize Redis / InMemory Cache
     from app.core.redis import cache
     await cache.initialize()
+    
+    # 2. Run Database Upgrades (Create missing tables/columns)
+    try:
+        from scripts.upgrade_db import upgrade
+        await upgrade()
+        logger.info("Database upgrades completed successfully.")
+    except Exception as e:
+        logger.error("Failed to run database upgrades", error=str(e), exc_info=True)
+        
     logger.info("Application startup complete.")
     yield
     logger.info("Application shutting down.")

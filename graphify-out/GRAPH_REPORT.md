@@ -1,16 +1,16 @@
-# Graph Report - CN Hackathon  (2026-06-30)
+# Graph Report - CN Hackathon  (2026-07-01)
 
 ## Corpus Check
-- 101 files · ~40,860 words
+- 116 files · ~42,290 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 575 nodes · 964 edges · 41 communities (38 shown, 3 thin omitted)
-- Extraction: 87% EXTRACTED · 13% INFERRED · 0% AMBIGUOUS · INFERRED: 126 edges (avg confidence: 0.72)
+- 594 nodes · 966 edges · 53 communities (50 shown, 3 thin omitted)
+- Extraction: 87% EXTRACTED · 13% INFERRED · 0% AMBIGUOUS · INFERRED: 127 edges (avg confidence: 0.72)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1660e04c`
+- Built from commit: `f2c54964`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -36,9 +36,9 @@
 - [[_COMMUNITY_Community 18|Community 18]]
 - [[_COMMUNITY_Community 19|Community 19]]
 - [[_COMMUNITY_Community 20|Community 20]]
+- [[_COMMUNITY_Community 28|Community 28]]
 - [[_COMMUNITY_Community 32|Community 32]]
 - [[_COMMUNITY_Community 36|Community 36]]
-- [[_COMMUNITY_Community 37|Community 37]]
 - [[_COMMUNITY_Community 38|Community 38]]
 - [[_COMMUNITY_Community 39|Community 39]]
 - [[_COMMUNITY_Community 40|Community 40]]
@@ -48,10 +48,10 @@
 2. `useApp()` - 20 edges
 3. `IssueRepository` - 18 edges
 4. `Issue` - 15 edges
-5. `InMemoryCache` - 14 edges
-6. `Base` - 13 edges
-7. `safe_transaction()` - 11 edges
-8. `get_leaderboard_route()` - 11 edges
+5. `Base` - 13 edges
+6. `safe_transaction()` - 11 edges
+7. `get_leaderboard_route()` - 11 edges
+8. `InMemoryCache` - 10 edges
 9. `admin_update_issue()` - 10 edges
 10. `build_issue_response()` - 10 edges
 
@@ -64,25 +64,25 @@
   backend/app/routers/dashboard.py → backend/app/core/dependencies.py
 - `list_departments()` --calls--> `get_district_ids_for_state()`  [INFERRED]
   backend/app/routers/departments.py → backend/app/core/dependencies.py
-- `IssueService` --uses--> `UnauthorizedActionException`  [INFERRED]
-  backend/app/services/issue_service.py → backend/app/core/exceptions.py
+- `seed_data()` --calls--> `hash_password()`  [INFERRED]
+  backend/scripts/seed.py → backend/app/core/security.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (41 total, 3 thin omitted)
+## Communities (53 total, 3 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.06
-Nodes (65): assert_admin_can_access_issue(), assert_admin_can_touch_department(), can_assign(), ensure_not_last_super_admin(), get_current_user(), get_current_user_optional(), get_district_ids_for_state(), get_scope_filter() (+57 more)
+Nodes (59): assert_admin_can_access_issue(), assert_admin_can_touch_department(), can_assign(), ensure_not_last_super_admin(), get_current_user(), get_current_user_optional(), get_district_ids_for_state(), get_scope_filter() (+51 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.06
-Nodes (47): get_me(), login(), AsyncSession, Register a new citizen user and return a JWT access token., Authenticate user credentials and return a JWT access token., Get profile information for the currently authenticated user., Set or update the authenticated user's state., Resolve coordinates to state/district regions and update the user's location pro (+39 more)
+Nodes (38): get_me(), login(), AsyncSession, Register a new citizen user and return a JWT access token., Authenticate user credentials and return a JWT access token., Get profile information for the currently authenticated user., Set or update the authenticated user's state., Resolve coordinates to state/district regions and update the user's location pro (+30 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.11
-Nodes (21): DuplicateIssueException, NagarikException, Raised when a user attempts an action they are not permitted to do., Raised when a duplicate issue action/submission is detected., Base exception for all domain errors in Nagarik., UnauthorizedActionException, create_access_token(), decode_access_token() (+13 more)
+Cohesion: 0.08
+Nodes (34): DuplicateIssueException, IssueNotFoundException, NagarikException, Raised when a user attempts an action they are not permitted to do., Raised when a duplicate issue action/submission is detected., Base exception for all domain errors in Nagarik., Raised when an issue is not found in the system., UnauthorizedActionException (+26 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.06
@@ -93,8 +93,8 @@ Cohesion: 0.10
 Nodes (16): Badge, Base, Comment, IssueFollower, Issue, Region, StatusHistory, Verification (+8 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.10
-Nodes (32): build_admin_issue_response(), Helper to populate verification and comment counts on IssueResponse for admin vi, build_issue_response(), create_comment(), create_issue(), follow_issue(), get_comments(), get_issue() (+24 more)
+Cohesion: 0.11
+Nodes (30): build_issue_response(), create_comment(), create_issue(), follow_issue(), get_comments(), get_issue(), list_issues(), AsyncSession (+22 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.07
@@ -106,7 +106,7 @@ Nodes (26): create_app(), lifespan(), google_callback(), google_login(), AsyncSe
 
 ### Community 8 - "Community 8"
 Cohesion: 0.15
-Nodes (6): InMemoryCache, Any, Find and delete keys matching a pattern., Fallback in-memory cache when Redis is unavailable., Wrapper that tries connecting to Redis, otherwise falls back to InMemoryCache., RedisCacheWrapper
+Nodes (5): InMemoryCache, Any, Local in-memory cache for development., Find and delete keys matching a pattern., clear_database()
 
 ### Community 9 - "Community 9"
 Cohesion: 0.18
@@ -117,8 +117,8 @@ Cohesion: 0.15
 Nodes (15): fetch_region_geometry(), find_nearby_issues(), get_bbox_filter(), get_or_create_region(), AsyncSession, UUID, Resolve the administrative region (state + district) for a coordinate via Nomina, Reverse geocode latitude and longitude to a human-readable address using OSM Nom (+7 more)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.21
-Nodes (15): _call_groq_api(), categorize_issue_text_only(), categorize_issue_vision(), check_duplicate_ai(), Any, AsyncSession, UUID, Main pipeline for categorization with caching and two-stage fallback. (+7 more)
+Cohesion: 0.19
+Nodes (17): _call_groq_api(), categorize_issue_text_only(), categorize_issue_vision(), check_duplicate_ai(), local_keyword_classifier(), Any, AsyncSession, UUID (+9 more)
 
 ### Community 12 - "Community 12"
 Cohesion: 0.22
@@ -133,8 +133,8 @@ Cohesion: 0.24
 Nodes (7): Notification, NotificationService, AsyncSession, UUID, Send an email using Resend, or fallback to logging., Create an in-app notification in the database., Fetch issue details and notify the reporter and all followers in-app + email. Ru
 
 ### Community 15 - "Community 15"
-Cohesion: 0.15
-Nodes (20): IssueNotFoundException, Raised when an issue is not found in the system., get_db(), AsyncSession, Context manager to run database operations safely inside a transaction.     If a, safe_transaction(), IssueService, AsyncSession (+12 more)
+Cohesion: 0.25
+Nodes (10): UploadFile, Upload an image for resolution proof. Returns the secure URL., upload_proof(), UploadFile, Validate, hash and upload a video file. Returns (public_url, sha256_hash)., Read file content, validate size & MIME type from bytes, and generate SHA-256 ha, Validate, hash and upload an image file. Returns (public_url, sha256_hash)., upload_image() (+2 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.20
@@ -156,13 +156,13 @@ Nodes (4): HotspotService, AsyncSession, UUID, Fetch issue coordinates via repos
 Cohesion: 0.50
 Nodes (3): compilerOptions, paths, @/*
 
+### Community 28 - "Community 28"
+Cohesion: 0.16
+Nodes (19): get_display_name(), get_leaderboard_route(), get_my_rank_route(), get_user_badges(), get_user_scope(), list_states(), AsyncSession, UUID (+11 more)
+
 ### Community 36 - "Community 36"
 Cohesion: 0.15
 Nodes (12): 1. Feature Overview & Architecture, 2. Test Credentials, 3. How to Run the Project, 4. Manual Verification Steps, 5. Recent Fixes & Scoping Enhancements, Project Memory: Region-Scoped Admin Hierarchy, Role Privileges, Start the Backend (+4 more)
-
-### Community 37 - "Community 37"
-Cohesion: 0.46
-Nodes (3): AsyncSession, UUID, UserRepository
 
 ### Community 38 - "Community 38"
 Cohesion: 0.50
@@ -176,12 +176,12 @@ Nodes (3): Deploy on Vercel, Getting Started, Learn More
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `User` connect `Community 0` to `Community 1`, `Community 2`, `Community 4`, `Community 5`, `Community 37`, `Community 7`, `Community 12`, `Community 14`?**
-  _High betweenness centrality (0.225) - this node is a cross-community bridge._
-- **Why does `Issue` connect `Community 4` to `Community 5`, `Community 9`, `Community 10`, `Community 12`, `Community 14`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+- **Why does `User` connect `Community 0` to `Community 1`, `Community 2`, `Community 4`, `Community 5`, `Community 7`, `Community 12`, `Community 14`, `Community 15`, `Community 28`?**
+  _High betweenness centrality (0.216) - this node is a cross-community bridge._
 - **Why does `Base` connect `Community 4` to `Community 0`, `Community 9`, `Community 12`, `Community 14`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+  _High betweenness centrality (0.039) - this node is a cross-community bridge._
+- **Why does `Issue` connect `Community 4` to `Community 0`, `Community 5`, `Community 9`, `Community 10`, `Community 12`, `Community 14`?**
+  _High betweenness centrality (0.038) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `User` (e.g. with `Base` and `UserRepository`) actually correct?**
   _`User` has 6 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 19 inferred relationships involving `useApp()` (e.g. with `MunicipalAnalyticsPage()` and `DepartmentsPage()`) actually correct?**
