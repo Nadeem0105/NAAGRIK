@@ -1,8 +1,9 @@
 import asyncio
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy import text
+from app.core.config import settings
 
-DATABASE_URL = "postgresql+asyncpg://postgres:01051234@34.93.8.111:5432/community_hero"
+DATABASE_URL = str(settings.SQLALCHEMY_DATABASE_URI)
 
 async def check():
     engine = create_async_engine(DATABASE_URL)
